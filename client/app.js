@@ -2,31 +2,9 @@ import React, { Component } from 'react';
 
 //import any other components here
 import HelloWorld from '../src/helloworld';
+// import Article from '../src/article';
+import ArticleComponent from '../src/article_component';
 
-//import CSS here, so webpack knows to include in bundle
-import style from '../client/style/main.css';
-
-//this is the component that generates the body of the page
-class App extends Component {
-
-  render() {
-    return (
-      <div>
-        <HelloWorld />
-      </div>
-    );
-  }
-}
-
-export default App;
-
-/* STEP 2, MORE COMPLICATED CODE FOLLOWS:
-
-import React, { Component } from 'react';
-
-//import any other components here
-import HelloWorld from '../src/helloworld';
-import Article from '../src/article';
 
 //import CSS here, so webpack knows to include in bundle
 import style from '../client/style/main.css';
@@ -36,14 +14,15 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
+    this.toggleSummaries = this.toggleSummaries.bind(this);
 
     //default state
     //this keeps track of "live" data on the browser
     this.state = {
       articles: null,
       error: null,
-      loaded: false
+      loaded: false,
+      showSummaries: false
     };
   }
 
@@ -71,12 +50,15 @@ class App extends Component {
   }
 
   //click handler for button
-  toggle() {
+  toggleSummaries() {
     console.log('toggle button clicked');
+    this.setState((prevState, props) => ({
+      showSummaries: !prevState.showSummaries
+    }))
   }
 
   render() {
-    const {loaded, error, articles} = this.state;
+    const {loaded, error, articles, showSummaries} = this.state;
     //  code above is equal to this:
     //  const loaded = this.state.loaded;
     //  const error = this.state.error;
@@ -94,10 +76,14 @@ class App extends Component {
 
       articles.map((article, idx) => {
         articleJSX.push(
-          <Article
+          <ArticleComponent
             key={idx}
             headline={article.headline}
+            summary={article.summary}
+            showSummary={showSummaries}
+            image={article.image}
           />
+
         );
       });
       // code above is equal to this:
@@ -106,12 +92,11 @@ class App extends Component {
       //     <Article key={i} headline={articles[i].headline}></Article>
       //   );
       // }
-
+    // <button onClick={this.toggleSummaries}>{showSummaries ? "Hide" : "Show"}</button>
       return (
         <div>
-          <button onClick={this.toggle}>Toggle Something</button>
+
           <HelloWorld />
-          <HelloWorld message="Hi!" />
           {articleJSX}
         </div>
       );
@@ -121,4 +106,3 @@ class App extends Component {
 }
 
 export default App;
-*/

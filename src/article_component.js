@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
 //Basic Article Component
-class Article extends Component {
+class ArticleComponent extends Component {
   constructor(props) {
     super(props);
 
     //initial state
-    this.state = {};
+    this.state = {height: null};
+    this.onImgLoad = this.onImgLoad.bind(this);
   }
 
   //Component Lifecycle
@@ -52,40 +53,28 @@ class Article extends Component {
   //use className to add CSS classes
   //remember that this is not HTML!!
   //https://reactjs.org/docs/introducing-jsx.html
+  onImgLoad({target:img}) {
+    // console.log(img.offsetHeight);
+    this.setState({height: img.offsetHeight})
+  }
   render() {
+
+
+    const divStyle = { height: this.state.height}
+
     const {headline, summary, showSummary, image} = this.props;
     const summaryDisplay = showSummary ? <div className="article-summary">{summary}</div> : "";
 
-    let xx = document.querySelector(".article-image");
-    if (xx) {
-      console.log(xx);
-      // console.log(xx.style);
-    }
     return <div>
-      <h3>{headline}</h3>
-      {summaryDisplay}
-      <div className="article-container">
-        <div className="image-container">
-          <p>BUNCH OF STUFF</p>
-          <div>
-          <img className="article-image" src={image} />
-          </div>
-
-        </div>
-        <div className="article-data">
-          <span>Views:</span>
-          <span>Price:</span>
-          <span>Preview</span>
-          <span>Purchase</span>
-        </div>
+      <div className="img-container" style={divStyle}>
+        <img onLoad={this.onImgLoad} className="article-image" src={image} />
       </div>
-
-    </div>;
+  </div>;
   }
 };
 
 //set default props here, if any
-Article.defaultProps = {};
+ArticleComponent.defaultProps = {};
 
 //export so others can use
-export default Article;
+export default ArticleComponent;

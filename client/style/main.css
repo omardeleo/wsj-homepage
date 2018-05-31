@@ -13,3 +13,28 @@ body {
 .imagetest {
   background: url('../../assets/cyberman.jpg');
 }
+
+.article-container {
+  width: 450px;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+}
+
+.image-container {
+  overflow: hidden;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.article-image {
+  width: 300px;
+  display: block;
+}
+
+.article-data {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}

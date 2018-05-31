@@ -5,7 +5,10 @@ import React, { Component } from 'react';
 class HelloWorld extends Component {
   //this is where you put the JSX to render on the page
   render() {
-    return <h1><img src='assets/wsj-logo.svg' />{this.props.message}</h1>;
+    return <h1>
+            <img src='assets/wsj-logo.svg' />
+            <p>Nothing is Free.</p>
+          </h1>;
   }
 };
 
