@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 //import any other components here
 import HelloWorld from '../src/helloworld';
-// import Article from '../src/article';
-import ArticleComponent from '../src/article_component';
+import Article from '../src/article';
+
 
 
 //import CSS here, so webpack knows to include in bundle
@@ -74,9 +74,11 @@ class App extends Component {
       //render articles
       let articleJSX = [];
 
-      articles.map((article, idx) => {
+
+articles.filter(article => article.image)
+        .map((article, idx) => {
         articleJSX.push(
-          <ArticleComponent
+          <Article
             key={idx}
             headline={article.headline}
             summary={article.summary}
@@ -95,9 +97,10 @@ class App extends Component {
     // <button onClick={this.toggleSummaries}>{showSummaries ? "Hide" : "Show"}</button>
       return (
         <div>
-
           <HelloWorld />
-          {articleJSX}
+          <div className="articles-container">
+            {articleJSX}
+          </div>
         </div>
       );
 
