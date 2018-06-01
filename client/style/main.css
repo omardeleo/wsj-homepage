@@ -1,6 +1,10 @@
 body {
   background-color: #eee;
+  display: flex;
+  justify-content: center;
 }
+
+
 
 .clicked {
   text-decoration: none;
@@ -14,27 +18,31 @@ body {
   background: url('../../assets/cyberman.jpg');
 }
 
-.article-container {
-  width: 450px;
-  background-color: black;
-  display: flex;
-  flex-direction: row;
+.articles-container {
+  width: 900px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1em;
 }
 
-.image-container {
-  overflow: hidden;
-  height: auto;
-  display: flex;
-  flex-direction: row;
+.articles-container img {
+  width:300px;
+  height: 300px;
+  object-fit: cover;
 }
 
-.article-image {
-  width: 300px;
-  display: block;
-}
+@media all and (max-width: 480px) {
+  .articles-container {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
 
-.article-data {
-  display: flex;
-  flex-direction: column;
-  color: white;
+  .articles-container img {
+    width: 380px;
+    height: 600px;
+    padding-bottom: 10px;
+  }
+
 }
