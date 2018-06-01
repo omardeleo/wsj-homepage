@@ -56,31 +56,9 @@ class Article extends Component {
     const {headline, summary, showSummary, image} = this.props;
     const summaryDisplay = showSummary ? <div className="article-summary">{summary}</div> : "";
 
-    let xx = document.querySelector(".article-image");
-    if (xx) {
-      console.log(xx);
-      // console.log(xx.style);
-    }
     return <div>
-      <h3>{headline}</h3>
-      {summaryDisplay}
-      <div className="article-container">
-        <div className="image-container">
-          <p>BUNCH OF STUFF</p>
-          <div>
-          <img className="article-image" src={image} />
-          </div>
-
-        </div>
-        <div className="article-data">
-          <span>Views:</span>
-          <span>Price:</span>
-          <span>Preview</span>
-          <span>Purchase</span>
-        </div>
-      </div>
-
-    </div>;
+            <img className="article-image" src={image} />
+          </div>;
   }
 };
 
