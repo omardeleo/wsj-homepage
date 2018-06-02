@@ -6,10 +6,13 @@ class Overlay extends Component {
   }
 
   render() {
+    let date = new Date(this.props.date);
+    const options = {month: "short", day: "2-digit"}
+    date = date.toLocaleString('en-EN', options).toUpperCase();
     return <div className="overlay">
       {this.props.headline}
       <div className="summary">
-        {this.props.summary}
+        {date} - {this.props.summary}
       </div>
     </div>;
   }
