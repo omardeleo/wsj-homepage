@@ -3,7 +3,12 @@ import React, { Component } from 'react';
 //import any other components here
 import HelloWorld from '../src/helloworld';
 import Article from '../src/article';
-
+import fontawesome from '@fortawesome/fontawesome';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import brands from '@fortawesome/fontawesome-free-brands';
+import free from '@fortawesome/fontawesome-free-solid';
+import regular from '@fortawesome/fontawesome-free-regular';
+fontawesome.library.add(brands, free, regular);
 
 
 //import CSS here, so webpack knows to include in bundle
