@@ -56,8 +56,9 @@ class Article extends Component {
     const {headline, summary, showSummary, image} = this.props;
     const summaryDisplay = showSummary ? <div className="article-summary">{summary}</div> : "";
 
-    return <div>
+    return <div className="article">
             <img className="article-image" src={image} />
+            <div className="overlay"></div>
           </div>;
   }
 };
