@@ -8,6 +8,9 @@ class Overlay extends Component {
   render() {
     return <div className="overlay">
       {this.props.headline}
+      <div className="summary">
+        {this.props.summary}
+      </div>
     </div>;
   }
 };
