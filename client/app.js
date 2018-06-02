@@ -84,6 +84,7 @@ articles.filter(article => article.image)
             summary={article.summary}
             showSummary={showSummaries}
             image={article.image}
+            date={article.date_published}
             idx={idx}
           />
 
