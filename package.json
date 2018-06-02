@@ -8,6 +8,9 @@
     "start": "webpack --config webpack.config.server.js"
   },
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/react-fontawesome": "0.0.20",
     "copy-webpack-plugin": "^4.5.1",
     "express": "^4.16.2",
     "morgan": "^1.9.0",
