@@ -31,7 +31,7 @@ class App extends Component {
     fetch('/api/articles').then((data) => {
       return data.json();
     }).then((data) => {
-      console.log(data);
+      // console.log(data);
 
       //send data to our state
       //which will trigger render()
@@ -40,7 +40,7 @@ class App extends Component {
         loaded: true
       });
     }).catch((error) => {
-      console.log(error);
+      // console.log(error);
 
       this.setState({
         error: error,
@@ -51,7 +51,7 @@ class App extends Component {
 
   //click handler for button
   toggleSummaries() {
-    console.log('toggle button clicked');
+    // console.log('toggle button clicked');
     this.setState((prevState, props) => ({
       showSummaries: !prevState.showSummaries
     }))
@@ -84,6 +84,7 @@ articles.filter(article => article.image)
             summary={article.summary}
             showSummary={showSummaries}
             image={article.image}
+            idx={idx}
           />
 
         );
