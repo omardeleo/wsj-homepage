@@ -28,7 +28,6 @@ body {
   width:330px;
   height: 330px;
   overflow: hidden;
-
 }
 
 .image-container {
@@ -62,7 +61,6 @@ img[class^="article-image"] {
 }
 
 @media all and (max-width: 480px) {
-
 
   .articles-container {
     width: 400px;
