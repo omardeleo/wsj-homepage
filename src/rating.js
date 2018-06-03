@@ -7,7 +7,7 @@ class Rating extends Component {
   }
 
   render() {
-      return <div className="rating">
+      return <div className="rating" title="Avg Rating: 4.7">
         <div className="stars-yellow">
           <FontAwesomeIcon icon={['fa', 'star']} />
           <FontAwesomeIcon icon={['fa', 'star']} />
