@@ -9,7 +9,7 @@ class Rating extends Component {
 
   render() {
   const {rating, mode}  = this.props;
-  let starWidth = mode === 330 ? Math.round((rating / 5) * 73) : null;
+  let starWidth = mode === 330 ? Math.round((rating / 5) * 72) : null;
   let starStyle = { width: starWidth};
   let title = `Avg Rating: ${rating}`;
 
