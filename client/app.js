@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-//import any other components here
 import HelloWorld from '../src/helloworld';
 import Article from '../src/article';
 import fontawesome from '@fortawesome/fontawesome';
@@ -62,25 +60,22 @@ class App extends Component {
     }))
   }
 
+  ratingGenerator(min,max) {
+    let num = Math.random() * (max - min) + min;
+    return Number(num.toFixed(1));
+  }
+
   render() {
     const {loaded, error, articles, showSummaries} = this.state;
-    //  code above is equal to this:
-    //  const loaded = this.state.loaded;
-    //  const error = this.state.error;
-    //  const articles = this.state.articles;
 
     if (error) {
-      //render this when there's error getting data
       return <div>Sorry! Something went wrong</div>
     } else if (!loaded) {
-      //render while content is loading
       return <div>Loading...</div>
     } else {
-      //render articles
       let articleJSX = [];
 
-
-articles.filter(article => article.image)
+      articles.filter(article => article.image)
         .map((article, idx) => {
         articleJSX.push(
           <Article
@@ -91,17 +86,10 @@ articles.filter(article => article.image)
             image={article.image}
             date={article.date_published}
             idx={idx}
-          />
-
-        );
+            rating={this.ratingGenerator(2.8,5)}
+          />);
       });
-      // code above is equal to this:
-      // for (let i = 0; i < articles.length; i++) {
-      //   articleJSX.push(
-      //     <Article key={i} headline={articles[i].headline}></Article>
-      //   );
-      // }
-    // <button onClick={this.toggleSummaries}>{showSummaries ? "Hide" : "Show"}</button>
+
       return (
         <div>
           <HelloWorld />
