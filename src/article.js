@@ -35,6 +35,7 @@ class Article extends Component {
 
   componentDidMount() {
     // console.log('component did mount');
+    console.log(this.props.rating);
   }
   shouldComponentUpdate() {
     return true;
