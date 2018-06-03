@@ -28,6 +28,7 @@ body {
   width:330px;
   height: 330px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .image-container {
@@ -52,6 +53,9 @@ img[class^="article-image"] {
   padding-right: 24px;
   padding-top: 14px;
   text-shadow: 2px 2px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .summary {
@@ -62,21 +66,21 @@ img[class^="article-image"] {
 
 .rating {
   position: relative;
-  width: 72px;
+  width: 73px;
   height: 20px;
   overflow: hidden;
-
+  margin-bottom: 10px;
 }
 
 .stars-yellow {
-  width: 55px;
+  width: 61px;
   overflow: hidden;
   position: absolute;
   z-index: 1;
   display: flex;
   flex-direction: row;
   color: gold;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .stars-empty {
@@ -85,7 +89,7 @@ img[class^="article-image"] {
   flex-direction: row;
   color: #888;
   z-index: 0;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 
