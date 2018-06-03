@@ -12,9 +12,13 @@ class Overlay extends Component {
     const options = {month: "short", day: "2-digit"}
     date = date.toLocaleString('en-EN', options).toUpperCase();
     return <div className="overlay">
-      {this.props.headline}
-      <div className="summary">
-        {date} - {this.props.summary}
+      <div>
+        <div className="headline">
+          {this.props.headline}
+        </div>
+        <div className="summary">
+          {date} - {this.props.summary}
+        </div>
       </div>
       <Rating />
     </div>;
