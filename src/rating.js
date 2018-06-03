@@ -6,9 +6,15 @@ class Rating extends Component {
     super(props);
   }
 
+
   render() {
-      return <div className="rating" title="Avg Rating: 4.7">
-        <div className="stars-yellow">
+  const {rating, mode}  = this.props;
+  let starWidth = mode === 330 ? Math.round((rating / 5) * 73) : null;
+  let starStyle = { width: starWidth};
+  let title = `Avg Rating: ${rating}`;
+
+      return <div className="rating" title={title}>
+        <div className="stars-yellow" style={starStyle}>
           <FontAwesomeIcon icon={['fa', 'star']} />
           <FontAwesomeIcon icon={['fa', 'star']} />
           <FontAwesomeIcon icon={['fa', 'star']} />

@@ -35,7 +35,7 @@ class Article extends Component {
 
   componentDidMount() {
     // console.log('component did mount');
-    console.log(this.props.rating);
+
   }
   shouldComponentUpdate() {
     return true;
@@ -77,21 +77,19 @@ class Article extends Component {
     const overlayStyle = {
         marginTop: this.state.overlayMarginTop
     };
-    const {headline, summary, showSummary, image, idx, date} = this.props;
+    const {headline, summary, showSummary, image, idx, date, rating} = this.props;
     const summaryDisplay = showSummary ? <div className="article-summary">{summary}</div> : "";
     const imgClass = `article-image-${idx}`;
     return <div className="article" onMouseEnter={ this.showOverlay }
           onMouseLeave={ this.hideOverlay }>
             <div className="image-container">
-              <img className={imgClass} src={image} />
+              <img className={imgClass} src={image} onLoad={this.onImgLoad}/>
             </div>
             <div className="overlay-container" style={ overlayStyle }>
-              <Overlay headline={headline} summary={summary} date={date}/>
+              <Overlay headline={ headline } summary={ summary } date={ date } rating={rating} mode={this.state.imgHeight}/>
             </div>
           </div>;
   }
 };
-
-Article.defaultProps = {};
 
 export default Article;

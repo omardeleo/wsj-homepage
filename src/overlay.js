@@ -20,7 +20,7 @@ class Overlay extends Component {
           {date} - {this.props.summary}
         </div>
       </div>
-      <Rating />
+      <Rating rating={this.props.rating} mode={this.props.mode}/>
     </div>;
   }
 };
