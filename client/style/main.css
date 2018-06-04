@@ -45,12 +45,11 @@ img[class^="article-image"] {
 .overlay {
   width: 330px;
   height: 330px;
+  margin-top: -330px;
   background-color: rgba(0, 0, 0, 0.6);
   font-size: 22px;
   color: white;
   box-sizing: border-box;
-  padding-left: 24px;
-  padding-right: 24px;
   padding-top: 14px;
   text-shadow: 2px 2px black;
   display: flex;
@@ -58,6 +57,10 @@ img[class^="article-image"] {
   justify-content: space-between;
 }
 
+.headline, .summary {
+  padding-left: 24px;
+  padding-right: 24px;
+}
 .summary {
   margin-top: 10px;
   font-size: 18px;
@@ -89,6 +92,22 @@ img[class^="article-image"] {
   color: #888;
   z-index: 0;
   font-size: 13px;
+}
+
+.overlay-footer {
+  width: 330px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 24px;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+
+.views {
+  width: auto;
+  font-size: 12px;
+  font-family: Verdana, Helvetica, sans-serif;
 }
 
 
@@ -137,6 +156,7 @@ img[class^="article-image"] {
     font-size: 20px;
     line-height: 1.4;
   }
+
 }
 
 .headline {
