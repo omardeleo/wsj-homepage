@@ -79,10 +79,10 @@ class App extends Component {
         article.rating = this.ratingGenerator(2.8,5);
         article.views = this.viewsGenerator(100000, 1367000);
       });
-      console.log(articles);
-      articles.sort(function(a,b) {
-        return b.rating - a.rating;
-      })
+      // console.log(articles);
+      // articles.sort(function(a,b) {
+      //   return b.rating - a.rating;
+      // })
     }
 
 
@@ -105,6 +105,7 @@ class App extends Component {
             date={article.date_published}
             idx={idx}
             rating={article.rating}
+            views={article.views}
           />);
       });
 
