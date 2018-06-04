@@ -65,11 +65,13 @@ img[class^="article-image"] {
   font-size: 18px;
   line-height: 1.2;
 }
-
+ .rating-container {
+   height: 14px;
+ }
 .rating {
   position: relative;
   width: 73px;
-  height: 20px;
+  height: 14px;
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -101,13 +103,33 @@ img[class^="article-image"] {
   padding-left: 24px;
   padding-right: 24px;
   box-sizing: border-box;
+  height: 24px;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .views {
   width: auto;
   font-size: 12px;
   font-family: Verdana, Helvetica, sans-serif;
+  text-shadow: none;
+  height: auto;
 }
+ .read-button {
+   box-sizing: border-box;
+   width: auto;
+   padding-left: 8px;
+   padding-right: 8px;
+   padding-top: 3px;
+   height: 24px;
+   border: 1px solid white;
+   font-size: 12px;
+   font-family: Verdana, Helvetica, sans-serif;
+   text-shadow: none;
+   border-radius: 5px;
+   background-color: #222;
+   margin-top: 1px;
+ }
 
 
 
