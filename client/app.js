@@ -65,8 +65,26 @@ class App extends Component {
     return Number(num.toFixed(1));
   }
 
+  viewsGenerator(min,max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   render() {
     const {loaded, error, articles, showSummaries} = this.state;
+
+    if (articles) {
+      articles.map(article => {
+        article.rating = this.ratingGenerator(2.8,5);
+        article.views = this.viewsGenerator(100000, 1367000);
+      });
+      console.log(articles);
+      articles.sort(function(a,b) {
+        return b.rating - a.rating;
+      })
+    }
+
 
     if (error) {
       return <div>Sorry! Something went wrong</div>
@@ -86,7 +104,7 @@ class App extends Component {
             image={article.image}
             date={article.date_published}
             idx={idx}
-            rating={this.ratingGenerator(2.8,5)}
+            rating={article.rating}
           />);
       });
 
