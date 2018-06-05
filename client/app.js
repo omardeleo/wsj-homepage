@@ -67,23 +67,35 @@ class App extends Component {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  sortFunction(key) {
+  sortFunction(key, direction) {
     let articles = this.state.articles;
     articles = articles.sort(function(a,b) {
-      return b[key] - a[key];
+      return direction === "bigToSmall" ? b[key] - a[key] : a[key] - b[key];
     })
     this.setState({articles: articles});
   }
 
   sortDate = () => {
-    this.sortFunction("date_published");
+    this.sortFunction("date_published", "bigToSmall");
   }
 
   sortRating = () => {
-    this.sortFunction("rating");
+    this.sortFunction("rating", "bigToSmall");
   }
 
   sortViews = () => {
+    this.sortFunction("views", "bigToSmall");
+  }
+
+  sortDateReverse = () => {
+    this.sortFunction("date_published");
+  }
+
+  sortRatingReverse = () => {
+    this.sortFunction("rating");
+  }
+
+  sortViewsReverse = () => {
     this.sortFunction("views");
   }
 
@@ -118,9 +130,12 @@ class App extends Component {
           <HelloWorld />
           <div className="sort">
             SORT BY:
-            <div onClick={this.sortDate}>DATE</div>
-            <div onClick={this.sortRating}>RATING</div>
-            <div onClick={this.sortViews}>VIEWS</div>
+            <div onClick={this.sortDate}>DATE (NEWEST)</div>
+            <div onClick={this.sortDateReverse}>DATE (OLDEST)</div>
+            <div onClick={this.sortRating}>RATING (HIGH)</div>
+            <div onClick={this.sortRatingReverse}>RATING (LOW)</div>
+            <div onClick={this.sortViews}>VIEWS (HIGH)</div>
+            <div onClick={this.sortViewsReverse}>VIEWS (LOW)</div>
           </div>
           <div className="articles-container">
             {articleJSX}
