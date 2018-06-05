@@ -17,10 +17,11 @@ class Overlay extends Component {
       return `${views}M`;
     } else {
       views = (views / 1000).toFixed(1);
-      views.charAt(views.length - 1) === "0" ? views = views.substring(0, views.length -2) : views;
+      if (views.charAt(views.length - 1) === "0"){
+        views = views.substring(0, views.length -2);
+      }
       return `${views}K`;
     }
-    return views;
   }
 
   render() {
