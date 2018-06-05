@@ -8,19 +8,13 @@ import free from '@fortawesome/fontawesome-free-solid';
 import regular from '@fortawesome/fontawesome-free-regular';
 fontawesome.library.add(brands, free, regular);
 
-
-//import CSS here, so webpack knows to include in bundle
 import style from '../client/style/main.css';
 
-//this is the component that generates the body of the page
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.toggleSummaries = this.toggleSummaries.bind(this);
-
-    //default state
-    //this keeps track of "live" data on the browser
     this.state = {
       articles: null,
       error: null,
@@ -34,17 +28,16 @@ class App extends Component {
     fetch('/api/articles').then((data) => {
       return data.json();
     }).then((data) => {
-      // console.log(data);
-
-      //send data to our state
-      //which will trigger render()
+      let articles = data.items;
+      articles.map(article => {
+        article.rating = this.ratingGenerator(2.8,5);
+        article.views = this.viewsGenerator(100000, 1367000);
+      });
       this.setState({
-        articles: data.items,
+        articles: articles,
         loaded: true
       });
     }).catch((error) => {
-      // console.log(error);
-
       this.setState({
         error: error,
         loaded: true
@@ -71,19 +64,44 @@ class App extends Component {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
+  sortDate = () => {
+    let articles = this.state.articles;
+    articles.map(article => {
+      article.date_published = new Date(article.date_published);
+    })
+    articles = articles.filter(article => typeof article.date_published === "object");
+    articles.sort(function(a,b) {
+      return b.date_published - a.date_published;
+    })
+    this.setState({articles: articles});
+  }
+
+  sortRating = () => {
+    let articles = this.state.articles;
+    articles.sort(function(a,b) {
+      return b.rating - a.rating;
+    })
+    this.setState({articles: articles});
+  }
+
+  sortViews = () => {
+    let articles = this.state.articles;
+    articles.sort(function(a,b) {
+      return b.views - a.views;
+    })
+    this.setState({articles: articles});
+  }
+
   render() {
+    console.log(this.state)
     const {loaded, error, articles, showSummaries} = this.state;
 
-    if (articles) {
-      articles.map(article => {
-        article.rating = this.ratingGenerator(2.8,5);
-        article.views = this.viewsGenerator(100000, 1367000);
-      });
-      // console.log(articles);
-      // articles.sort(function(a,b) {
-      //   return b.rating - a.rating;
-      // })
-    }
+    // if (articles) {
+    //   articles.map(article => {
+    //     article.rating = this.ratingGenerator(2.8,5);
+    //     article.views = this.viewsGenerator(100000, 1367000);
+    //   });
+    // }
 
 
     if (error) {
@@ -112,6 +130,12 @@ class App extends Component {
       return (
         <div>
           <HelloWorld />
+          <div className="sort">
+            SORT BY:
+            <div onClick={this.sortDate}>DATE</div>
+            <div onClick={this.sortRating}>RATING</div>
+            <div onClick={this.sortViews}>VIEWS</div>
+          </div>
           <div className="articles-container">
             {articleJSX}
           </div>
