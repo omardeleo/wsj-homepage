@@ -15,6 +15,7 @@ class App extends Component {
     super(props);
 
     this.toggleSummaries = this.toggleSummaries.bind(this);
+    this.sortFunction = this.sortFunction.bind(this);
     this.state = {
       articles: null,
       error: null,
@@ -32,7 +33,9 @@ class App extends Component {
       articles.map(article => {
         article.rating = this.ratingGenerator(2.8,5);
         article.views = this.viewsGenerator(100000, 1367000);
+        article.date_published = new Date(article.date_published);
       });
+      articles = articles.filter(article => typeof article.date_published === "object");
       this.setState({
         articles: articles,
         loaded: true
@@ -64,45 +67,28 @@ class App extends Component {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  sortDate = () => {
+  sortFunction(key) {
     let articles = this.state.articles;
-    articles.map(article => {
-      article.date_published = new Date(article.date_published);
-    })
-    articles = articles.filter(article => typeof article.date_published === "object");
-    articles.sort(function(a,b) {
-      return b.date_published - a.date_published;
+    articles = articles.sort(function(a,b) {
+      return b[key] - a[key];
     })
     this.setState({articles: articles});
+  }
+
+  sortDate = () => {
+    this.sortFunction("date_published");
   }
 
   sortRating = () => {
-    let articles = this.state.articles;
-    articles.sort(function(a,b) {
-      return b.rating - a.rating;
-    })
-    this.setState({articles: articles});
+    this.sortFunction("rating");
   }
 
   sortViews = () => {
-    let articles = this.state.articles;
-    articles.sort(function(a,b) {
-      return b.views - a.views;
-    })
-    this.setState({articles: articles});
+    this.sortFunction("views");
   }
 
   render() {
-    console.log(this.state)
     const {loaded, error, articles, showSummaries} = this.state;
-
-    // if (articles) {
-    //   articles.map(article => {
-    //     article.rating = this.ratingGenerator(2.8,5);
-    //     article.views = this.viewsGenerator(100000, 1367000);
-    //   });
-    // }
-
 
     if (error) {
       return <div>Sorry! Something went wrong</div>
