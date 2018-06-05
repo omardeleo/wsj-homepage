@@ -30,9 +30,11 @@ class Overlay extends Component {
     const {rating, views, mode} = this.props;
     date = date.toLocaleString('en-EN', options).toUpperCase();
     let titleViews = `Views: ${views.toLocaleString('en-EN')}`;
+    const hlStyle = {marginBottom: this.props.hlMargin }
+    console.log(hlStyle);
     return <div className="overlay">
       <div>
-        <div className="headline">
+        <div className="headline" style={hlStyle}>
           {this.props.headline}
         </div>
         <div className="summary">
@@ -43,7 +45,6 @@ class Overlay extends Component {
         <div className="rating-container">
           <Rating rating={rating} mode={mode}/>
         </div>
-
         <div className="views" title={titleViews}><FontAwesomeIcon icon={['fa', 'eye']} /> {this.viewsFormatter(views)}</div>
         <div className="read-button" title="Read Story">READ</div>
       </div>

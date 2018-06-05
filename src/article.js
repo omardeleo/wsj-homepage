@@ -10,7 +10,7 @@ class Article extends Component {
     this.showOverlay = this.showOverlay.bind(this);
     this.hideOverlay = this.hideOverlay.bind(this);
     this.onImgLoad = this.onImgLoad.bind(this);
-    this.state = { overlayMarginTop: 0, imgHeight: 0 };
+    this.state = { overlayMarginTop: -107, imgHeight: 0, headlineMarginBottom: 64 };
   }
 
   //Component Lifecycle
@@ -61,12 +61,12 @@ class Article extends Component {
     e.preventDefault();
     let img = document.querySelector(`.article-image-${this.props.idx}`);
     let margin = img.clientHeight === 330 ? -330 : -600;
-    this.setState( {overlayMarginTop: margin});
+    this.setState( {overlayMarginTop: margin, headlineMarginBottom: 0});
   }
 
   hideOverlay(e) {
     e.preventDefault();
-    this.setState( {overlayMarginTop: 0});
+    this.setState( {overlayMarginTop: -107, headlineMarginBottom: 64});
   }
 
   onImgLoad({target:img}) {
@@ -86,7 +86,7 @@ class Article extends Component {
               <img className={imgClass} src={image} onLoad={this.onImgLoad}/>
             </div>
             <div className="overlay-container" style={ overlayStyle }>
-              <Overlay headline={ headline } summary={ summary } date={ date } rating={rating} mode={this.state.imgHeight} views={views}/>
+              <Overlay headline={ headline } summary={ summary } date={ date } rating={rating} mode={this.state.imgHeight} views={views} hlMargin={this.state.headlineMarginBottom}/>
             </div>
           </div>;
   }
