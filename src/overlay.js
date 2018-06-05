@@ -31,7 +31,6 @@ class Overlay extends Component {
     date = date.toLocaleString('en-EN', options).toUpperCase();
     let titleViews = `Views: ${views.toLocaleString('en-EN')}`;
     const hlStyle = {marginBottom: this.props.hlMargin }
-    console.log(hlStyle);
     return <div className="overlay">
       <div>
         <div className="headline" style={hlStyle}>
