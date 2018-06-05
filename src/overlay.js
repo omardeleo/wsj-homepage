@@ -28,7 +28,7 @@ class Overlay extends Component {
     const options = {month: "short", day: "2-digit"}
     const {rating, views, mode} = this.props;
     date = date.toLocaleString('en-EN', options).toUpperCase();
-    let titleViews = `${views.toLocaleString('en-EN')} Views`;
+    let titleViews = `Views: ${views.toLocaleString('en-EN')}`;
     return <div className="overlay">
       <div>
         <div className="headline">
