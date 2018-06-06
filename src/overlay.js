@@ -27,11 +27,13 @@ class Overlay extends Component {
   render() {
     let date = new Date(this.props.date);
     const options = {month: "short", day: "2-digit"}
-    const {rating, views, mode} = this.props;
+    const {rating, views, mode, link} = this.props;
     date = date.toLocaleString('en-EN', options).toUpperCase();
     let titleViews = `Views: ${views.toLocaleString('en-EN')}`;
     const hlStyle = {marginBottom: this.props.hlMargin }
+
     return <div className="overlay">
+
       <div>
         <div className="headline" style={hlStyle}>
           {this.props.headline}
@@ -46,7 +48,7 @@ class Overlay extends Component {
         </div>
         <div className="views" title={titleViews}><FontAwesomeIcon icon={['fa', 'eye']} /> {this.viewsFormatter(views)}</div>
 
-        <a className="read-button"  target="_blank" href="https://www.wikipedia.org/">READ</a>
+        <a target="_blank" href={link} className="read-button">READ</a>
       </div>
     </div>;
   }
