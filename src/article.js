@@ -86,7 +86,9 @@ class Article extends Component {
               <img className={imgClass} src={image} onLoad={this.onImgLoad}/>
             </div>
             <div className="overlay-container" style={ overlayStyle }>
-              <Overlay headline={ headline } summary={ summary } date={ date } rating={rating} mode={this.state.imgHeight} views={views} hlMargin={this.state.headlineMarginBottom}/>
+              <Overlay headline={ headline } summary={ summary }
+                date={ date } rating={rating} mode={this.state.imgHeight}
+                views={views} hlMargin={this.state.headlineMarginBottom}/>
             </div>
           </div>;
   }
