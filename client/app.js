@@ -96,9 +96,9 @@ class App extends Component {
 
     let headlines = articles ? articles.map(article => article.category) : null;
     headlines = [...new Set(headlines)].sort();
-    headlines = headlines.map(headline => {
+    headlines = headlines.map( (headline, idx) => {
       console.log(headline);
-      return <option value={headline}>{headline}</option>;
+      return <option value={headline} key={idx}>{headline}</option>;
     });
     console.log(headlines);
     if (error) {
