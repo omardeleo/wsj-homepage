@@ -117,6 +117,7 @@ img[class^="article-image"] {
   text-shadow: none;
   height: auto;
 }
+
  .read-button {
    box-sizing: border-box;
    width: 48px;
@@ -130,6 +131,8 @@ img[class^="article-image"] {
    text-shadow: none;
    border-radius: 5px;
    background-color: #222;
+   text-decoration: none;
+   color: white;
  }
 
  .read-button:hover {
