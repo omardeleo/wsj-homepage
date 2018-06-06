@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HelloWorld from '../src/helloworld';
 import Article from '../src/article';
+import SortForm from '../src/sort_form';
 import fontawesome from '@fortawesome/fontawesome';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import brands from '@fortawesome/fontawesome-free-brands';
@@ -129,6 +130,7 @@ class App extends Component {
       return (
         <div>
           <HelloWorld />
+          <SortForm />
           <div className="sort">
             SORT BY:
             <div onClick={this.sortDate}>DATE (NEWEST)</div>
