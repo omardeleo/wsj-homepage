@@ -122,6 +122,7 @@ class App extends Component {
             idx={idx}
             rating={article.rating}
             views={article.views}
+            link={article.share_link}
           />);
       });
 
