@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import HelloWorld from '../src/helloworld';
 import Article from '../src/article';
-import SortForm from '../src/sort_form';
 import fontawesome from '@fortawesome/fontawesome';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import brands from '@fortawesome/fontawesome-free-brands';
@@ -100,6 +99,15 @@ class App extends Component {
     this.sortFunction("views");
   }
 
+  sortFunc() {
+    console.log("ok");
+    console.log(this.refs.sorter.value);
+    if (this.refs.sorter.value === "rating-max") {
+      this.sortFunction("rating", "bigToSmall");
+      console.log(this.refs.sorter.value);
+    }
+  }
+
   render() {
     const {loaded, error, articles, showSummaries} = this.state;
 
@@ -133,7 +141,16 @@ class App extends Component {
       return (
         <div>
           <HelloWorld />
-          <SortForm />
+          <div className="sort-form">
+            <select ref="sorter" onChange={ (e) => { this.sortFunc() } }>
+              <option value="date-max">Date (Newer)</option>
+              <option value="date-min">Date (Older)</option>
+              <option value="rating-max">Rating (Higher)</option>
+              <option value="rating-min">Rating (Lower)</option>
+              <option value="views-max">Views (More)</option>
+              <option value="views-min">Views (Less)</option>
+            </select>
+          </div>
           <div className="sort">
             SORT BY:
             <div onClick={this.sortDate}>DATE (NEWEST)</div>
