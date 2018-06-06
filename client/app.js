@@ -70,41 +70,24 @@ class App extends Component {
   sortFunction(key, direction) {
     let articles = this.state.articles;
     articles = articles.sort(function(a,b) {
-      return direction === "bigToSmall" ? b[key] - a[key] : a[key] - b[key];
+      return direction === "max" ? b[key] - a[key] : a[key] - b[key];
     })
     this.setState({articles: articles});
   }
 
-  sortDate = () => {
-    this.sortFunction("date_published", "bigToSmall");
-  }
-
-  sortRating = () => {
-    this.sortFunction("rating", "bigToSmall");
-  }
-
-  sortViews = () => {
-    this.sortFunction("views", "bigToSmall");
-  }
-
-  sortDateReverse = () => {
-    this.sortFunction("date_published");
-  }
-
-  sortRatingReverse = () => {
-    this.sortFunction("rating");
-  }
-
-  sortViewsReverse = () => {
-    this.sortFunction("views");
-  }
-
-  sortFunc() {
-    console.log("ok");
-    console.log(this.refs.sorter.value);
-    if (this.refs.sorter.value === "rating-max") {
-      this.sortFunction("rating", "bigToSmall");
-      console.log(this.refs.sorter.value);
+  sortSelector() {
+    if (this.refs.sort.value === "date-max") {
+      this.sortFunction("date_published", "max");
+    } else if (this.refs.sort.value === "date-min") {
+      this.sortFunction("date_published");
+    } else if (this.refs.sort.value === "rating-max") {
+      this.sortFunction("rating", "max");
+    } else if (this.refs.sort.value === "rating-min") {
+      this.sortFunction("rating");
+    } else if (this.refs.sort.value === "views-max") {
+      this.sortFunction("views", "max");
+    } else if (this.refs.sort.value === "views-min") {
+      this.sortFunction("views");
     }
   }
 
@@ -113,6 +96,10 @@ class App extends Component {
 
     let headlines = articles ? articles.map(article => article.category) : null;
     headlines = [...new Set(headlines)].sort();
+    headlines = headlines.map(headline => {
+      console.log(headline);
+      return <option value={headline}>{headline}</option>;
+    });
     console.log(headlines);
     if (error) {
       return <div>Sorry! Something went wrong</div>
@@ -142,7 +129,7 @@ class App extends Component {
         <div>
           <HelloWorld />
           <div className="sort-form">
-            <select ref="sorter" onChange={ (e) => { this.sortFunc() } }>
+            <select ref="sort" onChange={ (e) => { this.sortSelector() } }>
               <option value="date-max">Date (Newer)</option>
               <option value="date-min">Date (Older)</option>
               <option value="rating-max">Rating (Higher)</option>
@@ -151,14 +138,10 @@ class App extends Component {
               <option value="views-min">Views (Less)</option>
             </select>
           </div>
-          <div className="sort">
-            SORT BY:
-            <div onClick={this.sortDate}>DATE (NEWEST)</div>
-            <div onClick={this.sortDateReverse}>DATE (OLDEST)</div>
-            <div onClick={this.sortRating}>RATING (HIGH)</div>
-            <div onClick={this.sortRatingReverse}>RATING (LOW)</div>
-            <div onClick={this.sortViews}>VIEWS (HIGH)</div>
-            <div onClick={this.sortViewsReverse}>VIEWS (LOW)</div>
+          <div className="filter-form">
+            <select ref="filter" onChange={ (e) => { this.sortSelector() } }>
+              {headlines}
+            </select>
           </div>
           <div className="articles-container">
             {articleJSX}
