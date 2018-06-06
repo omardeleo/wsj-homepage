@@ -103,6 +103,9 @@ class App extends Component {
   render() {
     const {loaded, error, articles, showSummaries} = this.state;
 
+    let headlines = articles ? articles.map(article => article.category) : null;
+    headlines = [...new Set(headlines)].sort();
+    console.log(headlines);
     if (error) {
       return <div>Sorry! Something went wrong</div>
     } else if (!loaded) {
