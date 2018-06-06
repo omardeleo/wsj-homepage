@@ -45,7 +45,8 @@ class Overlay extends Component {
           <Rating rating={rating} mode={mode}/>
         </div>
         <div className="views" title={titleViews}><FontAwesomeIcon icon={['fa', 'eye']} /> {this.viewsFormatter(views)}</div>
-        <div className="read-button" title="Read Story">READ</div>
+
+        <a className="read-button"  target="_blank" href="https://www.wikipedia.org/">READ</a>
       </div>
     </div>;
   }
