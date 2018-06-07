@@ -4,11 +4,12 @@ import React, { Component } from 'react';
 class HelloWorld extends Component {
 
   render() {
-    return <h1>
-
-            <img src='assets/wsj-logo.svg' />
-            <p>Nothing is Free.</p>
-          </h1>;
+    return <div className="header">
+              <div className="ticker"></div>
+            <h1>
+              <img src='assets/wsj-logo.svg' />
+            </h1>
+          </div>;
   }
 };
 
