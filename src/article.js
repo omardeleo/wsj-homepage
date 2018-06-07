@@ -77,7 +77,7 @@ class Article extends Component {
     const overlayStyle = {
         marginTop: this.state.overlayMarginTop
     };
-    const {headline, summary, showSummary, image, idx, date, rating, views, link} = this.props
+    const {headline, summary, showSummary, image, idx, date, rating, views, link, category} = this.props
     const summaryDisplay = showSummary ? <div className="article-summary">{summary}</div> : "";
     const imgClass = `article-image-${idx}`;
     return <div className="article" onMouseEnter={ this.showOverlay }
