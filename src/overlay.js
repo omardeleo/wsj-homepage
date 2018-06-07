@@ -27,19 +27,19 @@ class Overlay extends Component {
   render() {
     let date = new Date(this.props.date);
     const options = {month: "short", day: "2-digit"}
-    const {rating, views, mode, link} = this.props;
+    const {rating, views, mode, link, category, headline, summary} = this.props;
     date = date.toLocaleString('en-EN', options).toUpperCase();
     let titleViews = `Views: ${views.toLocaleString('en-EN')}`;
     const hlStyle = {marginBottom: this.props.hlMargin }
 
     return <div className="overlay">
-
+      <div>{category}</div>
       <div>
         <div className="headline" style={hlStyle}>
-          {this.props.headline}
+          {headline}
         </div>
         <div className="summary">
-          {date} - {this.props.summary}
+          {date} - {summary}
         </div>
       </div>
       <div className="overlay-footer">
