@@ -95,6 +95,7 @@ class Article extends Component {
                 views={views}
                 hlMargin={this.state.headlineMarginBottom}
                 link={link}
+                category={category}
               />
             </div>
           </div>;
