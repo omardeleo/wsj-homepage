@@ -10,7 +10,8 @@ class Article extends Component {
     this.showOverlay = this.showOverlay.bind(this);
     this.hideOverlay = this.hideOverlay.bind(this);
     this.onImgLoad = this.onImgLoad.bind(this);
-    this.state = { overlayMarginTop: -330, imgHeight: 0, headlineMarginBottom: 100, test: true };
+    // this.state = { overlayMarginTop: -330, imgHeight: 0, headlineMarginBottom: 0, test: true };
+    this.state = { overlayMarginTop: -118, imgHeight: 0, headlineMarginBottom: 100, test: false };
   }
 
   //Component Lifecycle
@@ -69,7 +70,7 @@ class Article extends Component {
   hideOverlay(e) {
     if (!this.state.test) {
       e.preventDefault();
-      this.setState( {overlayMarginTop: -110, headlineMarginBottom: 100});
+      this.setState( {overlayMarginTop: -118, headlineMarginBottom: 100});
     }
   }
 
