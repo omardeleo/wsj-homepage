@@ -10,7 +10,7 @@ class Article extends Component {
     this.showOverlay = this.showOverlay.bind(this);
     this.hideOverlay = this.hideOverlay.bind(this);
     this.onImgLoad = this.onImgLoad.bind(this);
-    this.state = { overlayMarginTop: -110, imgHeight: 0, headlineMarginBottom: 100 };
+    this.state = { overlayMarginTop: -330, imgHeight: 0, headlineMarginBottom: 100, test: true };
   }
 
   //Component Lifecycle
@@ -58,15 +58,19 @@ class Article extends Component {
   //remember that this is not HTML!!
   //https://reactjs.org/docs/introducing-jsx.html
   showOverlay(e) {
-    e.preventDefault();
-    let img = document.querySelector(`.article-image-${this.props.idx}`);
-    let margin = img.clientHeight === 330 ? -330 : -600;
-    this.setState( {overlayMarginTop: margin, headlineMarginBottom: 0});
+    if (!this.state.test) {
+      e.preventDefault();
+      let img = document.querySelector(`.article-image-${this.props.idx}`);
+      let margin = img.clientHeight === 330 ? -330 : -600;
+      this.setState( {overlayMarginTop: margin, headlineMarginBottom: 0});
+    }
   }
 
   hideOverlay(e) {
-    e.preventDefault();
-    this.setState( {overlayMarginTop: -110, headlineMarginBottom: 100});
+    if (!this.state.test) {
+      e.preventDefault();
+      this.setState( {overlayMarginTop: -110, headlineMarginBottom: 100});
+    }
   }
 
   onImgLoad({target:img}) {
