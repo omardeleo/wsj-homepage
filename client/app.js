@@ -125,7 +125,7 @@ class App extends Component {
   }
 
   render() {
-    const {loaded, error, displayArticles, showSummaries, articles, categories} = this.state;
+    const {loaded, error, displayArticles, showSummaries, articles, categories, category} = this.state;
     let options = null;
     if (categories) {
       options = categories.map( (category, idx) => {
@@ -153,6 +153,7 @@ class App extends Component {
             rating={article.rating}
             views={article.views}
             link={article.share_link}
+            category={article.category}
           />);
       });
 
