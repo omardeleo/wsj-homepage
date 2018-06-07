@@ -1,7 +1,16 @@
 body {
-  background-color: #eee;
+  background-color: white;
   display: flex;
   justify-content: center;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.header img {
+  height: 50px;
 }
 
 .clicked {
