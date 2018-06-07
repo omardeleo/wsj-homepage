@@ -20,7 +20,11 @@ class App extends Component {
       articles: null,
       error: null,
       loaded: false,
-      showSummaries: false
+      showSummaries: false,
+      displayArticles: null,
+      categories: null,
+      sort: null,
+      filter: null
     };
   }
 
@@ -36,9 +40,16 @@ class App extends Component {
         article.date_published = new Date(article.date_published);
       });
       articles = articles.filter(article => typeof article.date_published === "object");
+      articles = articles.filter(article => article.image);
+      let categories = articles.map(article => article.category);
+      categories = [...new Set(categories)];
       this.setState({
         articles: articles,
-        loaded: true
+        displayArticles: articles,
+        categories: categories,
+        loaded: true,
+        sort: "date-max",
+        filter: "All"
       });
     }).catch((error) => {
       this.setState({
@@ -67,49 +78,69 @@ class App extends Component {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  sortFunction(key, direction) {
-    let articles = this.state.articles;
-    articles = articles.sort(function(a,b) {
+  sortFunction(articles, key, direction) {
+    return articles.sort(function(a,b) {
       return direction === "max" ? b[key] - a[key] : a[key] - b[key];
     })
-    this.setState({articles: articles});
   }
 
-  sortSelector() {
-    if (this.refs.sort.value === "date-max") {
-      this.sortFunction("date_published", "max");
-    } else if (this.refs.sort.value === "date-min") {
-      this.sortFunction("date_published");
-    } else if (this.refs.sort.value === "rating-max") {
-      this.sortFunction("rating", "max");
-    } else if (this.refs.sort.value === "rating-min") {
-      this.sortFunction("rating");
-    } else if (this.refs.sort.value === "views-max") {
-      this.sortFunction("views", "max");
-    } else if (this.refs.sort.value === "views-min") {
-      this.sortFunction("views");
+  sortRouter(sortValue, articles) {
+    if (sortValue === "date-max") {
+      return this.sortFunction(articles, "date_published", "max");
+    } else if (sortValue === "date-min") {
+      return this.sortFunction(articles, "date_published");
+    } else if (sortValue === "rating-max") {
+      return this.sortFunction(articles, "rating", "max");
+    } else if (sortValue === "rating-min") {
+      return this.sortFunction(articles, "rating");
+    } else if (sortValue === "views-max") {
+      return this.sortFunction(articles, "views", "max");
+    } else if (sortValue === "views-min") {
+      return this.sortFunction(articles, "views");
+    }
+  }
+
+  filterFunction(sort, filter) {
+    let articles = this.state.articles;
+    if (filter !== "All") {
+      articles = articles.filter(article => article.category === filter);
+      articles = this.sortRouter(sort, articles);
+    } else {
+      articles = this.sortRouter(sort, articles);
+    }
+    this.setState({displayArticles: articles, sort, filter});
+  }
+
+  filterSelector(key) {
+    let sort, filter;
+    if (key === "sort") {
+      sort = this.refs.sort.value;
+      filter = this.state.filter;
+      this.filterFunction(sort, filter);
+    } else {
+      sort = this.state.sort;
+      filter = this.refs.filter.value;
+      this.filterFunction(sort, filter);
     }
   }
 
   render() {
-    const {loaded, error, articles, showSummaries} = this.state;
+    const {loaded, error, displayArticles, showSummaries, articles, categories} = this.state;
+    let options = null;
+    if (categories) {
+      options = categories.map( (category, idx) => {
+        return <option value={category} key={idx}>{category}</option>;
+      });
+    }
 
-    let headlines = articles ? articles.map(article => article.category) : null;
-    headlines = [...new Set(headlines)].sort();
-    headlines = headlines.map( (headline, idx) => {
-      console.log(headline);
-      return <option value={headline} key={idx}>{headline}</option>;
-    });
-    console.log(headlines);
+
     if (error) {
       return <div>Sorry! Something went wrong</div>
     } else if (!loaded) {
       return <div>Loading...</div>
     } else {
       let articleJSX = [];
-
-      articles.filter(article => article.image)
-        .map((article, idx) => {
+      displayArticles.map((article, idx) => {
         articleJSX.push(
           <Article
             key={idx}
@@ -129,7 +160,7 @@ class App extends Component {
         <div>
           <HelloWorld />
           <div className="sort-form">
-            <select ref="sort" onChange={ (e) => { this.sortSelector() } }>
+            <select ref="sort" onChange={ (e) => { this.filterSelector("sort") } }>
               <option value="date-max">Date (Newer)</option>
               <option value="date-min">Date (Older)</option>
               <option value="rating-max">Rating (Higher)</option>
@@ -139,11 +170,13 @@ class App extends Component {
             </select>
           </div>
           <div className="filter-form">
-            <select ref="filter" onChange={ (e) => { this.sortSelector() } }>
-              {headlines}
+            <select ref="filter" onChange={ (e) => { this.filterSelector("filter") } }>
+              <option value="All">All</option>
+              {options}
             </select>
           </div>
           <div className="articles-container">
+
             {articleJSX}
           </div>
         </div>
