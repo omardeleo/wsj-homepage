@@ -33,8 +33,8 @@ class Overlay extends Component {
     const hlStyle = {marginBottom: this.props.hlMargin }
 
     return <div className="overlay">
-      <div>{category}</div>
       <div>
+        <div className="category">{category}</div>
         <div className="headline" style={hlStyle}>
           {headline}
         </div>

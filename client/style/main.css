@@ -44,11 +44,22 @@ img[class^="article-image"] {
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
   box-sizing: border-box;
-  padding-top: 14px;
   text-shadow: 1px 1px black;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.category {
+  background-color: #666;
+  font-size: 14px;
+  font-family: sans-serif;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  box-sizing: border-box;
+  width: auto;
 }
 
 .headline, .summary {
@@ -60,15 +71,19 @@ img[class^="article-image"] {
   font-size: 20px;
   padding-left: 20px;
   font-family: 'Prata', serif;
+  margin-top: 7px;
 }
+
 .summary {
   margin-top: 10px;
   font-size: 18px;
   line-height: 1.2;
 }
+
  .rating-container {
    height: 14px;
  }
+
 .rating {
   position: relative;
   width: 73px;
@@ -106,7 +121,7 @@ img[class^="article-image"] {
   box-sizing: border-box;
   height: 24px;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .views {
