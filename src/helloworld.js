@@ -8,12 +8,12 @@ class HelloWorld extends Component {
     return <div className="header-container">
             <div className="ticker">
               <div className="quotes">
-                <div>DJIA25294.07 0.21%▲</div>
-                <div>S&P 5002776.86 0.23%▲</div>
-                <div>Nasdaq7646.34 0.15%▲</div>
-                <div>U.S. 10 Yr-5/32 Yield2.939%▼</div>
-                <div>Crude Oil65.68 -0.41%▼</div>
-                <div>Euro1.1770 -0.25%▼</div>
+                <div><span>DJIA 25294.07</span> 0.21%▲</div>
+                <div><span>S&P 5002776.86</span> 0.23%▲</div>
+                <div><span>Nasdaq 7646.34</span> 0.15%▲</div>
+                <div><span>U.S. 10 Yr-5/32 Yield</span> 2.939%▼</div>
+                <div><span>Crude Oil 65.68</span> -0.41%▼</div>
+                <div><span>Euro 1.1770</span> -0.25%▼</div>
               </div>
             </div>
             <div className="header">

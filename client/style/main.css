@@ -19,10 +19,48 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
-body {
+.main {
   background-color: white;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+
+.header-container {
+}
+
+.ticker {
+  height: 35px;
+  width: auto;
+  background-color: black;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+}
+
+.quotes {
+  font-family: sans-serif;
+  font-size: 12px;
+  width: 1020px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.quotes div:nth-of-type(-n+3) {
+  color: green;
+}
+
+.quotes div {
+  color: red;
+}
+
+.quotes div span {
+  color: white;
 }
 
 .header {
@@ -43,12 +81,20 @@ body {
   text-decoration: underline;
 }
 
-.articles-container {
+.filters {
+  margin-top: 10px;
+  margin-bottom: 10px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.articles-container {
+  width: auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 1em;
 }
+
 .article {
   display: flex;
   flex-direction: column;
