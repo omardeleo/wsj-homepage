@@ -156,31 +156,36 @@ class App extends Component {
             category={article.category}
           />);
       });
-
+      let date = new Date(Date.now()).toLocaleString("en-EN", {month: "long", day: "numeric", year: "numeric"})
       return (
         <div>
-          <HelloWorld />
-          <div className="sort-form">
-            <select ref="sort" onChange={ (e) => { this.filterSelector("sort") } }>
-              <option value="date-max">Date (Newer)</option>
-              <option value="date-min">Date (Older)</option>
-              <option value="rating-max">Rating (Higher)</option>
-              <option value="rating-min">Rating (Lower)</option>
-              <option value="views-max">Views (More)</option>
-              <option value="views-min">Views (Less)</option>
-            </select>
-          </div>
-          <div className="filter-form">
-            <select ref="filter" onChange={ (e) => { this.filterSelector("filter") } }>
-              <option value="All">All</option>
-              {options}
-            </select>
+        <HelloWorld />
+        <div className="main">
+          <div className="date">{date}</div>
+          <div className="filters">
+            <div className="sort-form">
+              <select ref="sort" onChange={ (e) => { this.filterSelector("sort") } }>
+                <option value="date-max">Date (Newer)</option>
+                <option value="date-min">Date (Older)</option>
+                <option value="rating-max">Rating (Higher)</option>
+                <option value="rating-min">Rating (Lower)</option>
+                <option value="views-max">Views (More)</option>
+                <option value="views-min">Views (Less)</option>
+              </select>
+            </div>
+            <div className="filter-form">
+              <select ref="filter" onChange={ (e) => { this.filterSelector("filter") } }>
+                <option value="All">All</option>
+                {options}
+              </select>
+            </div>
           </div>
           <div className="articles-container">
-
             {articleJSX}
           </div>
         </div>
+      </div>
+
       );
 
     }
