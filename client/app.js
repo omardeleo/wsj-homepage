@@ -16,6 +16,7 @@ class App extends Component {
 
     this.toggleSummaries = this.toggleSummaries.bind(this);
     this.sortFunction = this.sortFunction.bind(this);
+    this.displayFunction = this.displayFunction.bind(this);
     this.state = {
       articles: null,
       error: null,
@@ -24,12 +25,13 @@ class App extends Component {
       displayArticles: null,
       categories: null,
       sort: null,
-      filter: null
+      filter: null,
+      displayDropdown: false
     };
   }
 
   componentDidMount() {
-    //fetching data clientside
+
     fetch('/api/articles').then((data) => {
       return data.json();
     }).then((data) => {
@@ -124,9 +126,20 @@ class App extends Component {
     }
   }
 
+  displayFunction() {
+    this.setState({displayDropdown: true});
+    console.log("yo");
+    console.log(this.state)
+  }
+
   render() {
+    const dropdownStyle = this.state.displayDropdown ? {height: "auto"} : {height: 20}
     const {loaded, error, displayArticles, showSummaries, articles, categories, category} = this.state;
     let options = null;
+    let sortOptions = ["Date (Newer)","Date (Older)","Rating (Higher)","Rating (Lower)","Views (More)","Views (Less)"]
+
+    let sortDivs = sortOptions.map(option => <div>{option}</div>);
+
     if (categories) {
       options = categories.map( (category, idx) => {
         return <option value={category} key={idx}>{category}</option>;
@@ -166,15 +179,10 @@ class App extends Component {
 
           <div className="filters">
             <div className="date">{date}</div>
-            <div className="sort-form">
-              <select ref="sort" onChange={ (e) => { this.filterSelector("sort") } }>
-                <option value="date-max">Date (Newer)</option>
-                <option value="date-min">Date (Older)</option>
-                <option value="rating-max">Rating (Higher)</option>
-                <option value="rating-min">Rating (Lower)</option>
-                <option value="views-max">Views (More)</option>
-                <option value="views-min">Views (Less)</option>
-              </select>
+            <div className="sort-form-container">
+            <div className="sort-form" onClick={this.displayFunction} style={dropdownStyle}>
+              {sortDivs}
+            </div>
             </div>
             <div className="filter-form">
               <select ref="filter" onChange={ (e) => { this.filterSelector("filter") } }>
@@ -199,3 +207,10 @@ export default App;
 // <div className="intro">
 //   The first 3 are always free.
 // </div>
+
+// <option value="date-max">Date (Newer)</option>
+// <option value="date-min">Date (Older)</option>
+// <option value="rating-max">Rating (Higher)</option>
+// <option value="rating-min">Rating (Lower)</option>
+// <option value="views-max">Views (More)</option>
+// <option value="views-min">Views (Less)</option>

@@ -100,6 +100,26 @@ time, mark, audio, video {
   display: flex;
   justify-content: center;
 }
+
+.sort-form-container {
+	width: 80px;
+}
+
+.sort-form {
+	display: flex;
+	flex-direction: column;
+	height: 20px;
+	overflow: hidden;
+	position: absolute;
+	width: inherit;
+}
+
+.sort-form div{
+	height: auto;
+	width: inherit;
+	background-color: blue;
+}
+
 .articles-container {
   width: auto;
   display: grid;
