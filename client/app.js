@@ -166,7 +166,7 @@ class App extends Component {
 
           <div className="filters">
             <div className="date">{date}</div>
-            <div className="sort-form">
+            <div className="select-form">
               <select ref="sort" onChange={ (e) => { this.filterSelector("sort") } }>
                 <option value="date-max">Date (Newer)</option>
                 <option value="date-min">Date (Older)</option>
@@ -176,7 +176,7 @@ class App extends Component {
                 <option value="views-min">Views (Less)</option>
               </select>
             </div>
-            <div className="filter-form">
+            <div className="select-form">
               <select ref="filter" onChange={ (e) => { this.filterSelector("filter") } }>
                 <option value="All">All</option>
                 {options}
