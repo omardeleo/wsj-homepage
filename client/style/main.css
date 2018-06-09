@@ -134,7 +134,10 @@ time, mark, audio, video {
 	font-size: 14px;
 	border-right: 1px solid #999;
 	border-left: 1px solid #999;
-	cursor: pointer;
+	-webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .sort-form div:hover {
@@ -172,7 +175,6 @@ time, mark, audio, video {
   width:330px;
   height: 330px;
   overflow: hidden;
-  cursor: pointer;
 }
 
 .image-container {
@@ -295,6 +297,7 @@ img[class^="article-image"] {
    background-color: #222;
    text-decoration: none;
    color: white;
+   cursor: pointer;
  }
 
  .read-button:hover {
