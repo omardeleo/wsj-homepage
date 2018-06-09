@@ -220,7 +220,7 @@ img[class^="article-image"] {
    font-size: 12px;
    font-family: Verdana, Helvetica, sans-serif;
    text-shadow: none;
-   border-radius: 5px;
+   border-radius: 3px;
    background-color: #222;
    text-decoration: none;
    color: white;
