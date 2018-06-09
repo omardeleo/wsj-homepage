@@ -159,10 +159,13 @@ class App extends Component {
       let date = new Date(Date.now()).toLocaleString("en-EN", {month: "long", day: "numeric", year: "numeric"})
       return (
         <div>
+
         <Header />
         <div className="main">
-          <div className="date">{date}</div>
+
+
           <div className="filters">
+            <div className="date">{date}</div>
             <div className="sort-form">
               <select ref="sort" onChange={ (e) => { this.filterSelector("sort") } }>
                 <option value="date-max">Date (Newer)</option>
@@ -193,3 +196,6 @@ class App extends Component {
 }
 
 export default App;
+// <div className="intro">
+//   The first 3 are always free.
+// </div>
