@@ -85,7 +85,7 @@ class Article extends Component {
     const {headline, summary, showSummary, image, idx, date, rating, views, link, category} = this.props
     const summaryDisplay = showSummary ? <div className="article-summary">{summary}</div> : "";
     const imgClass = `article-image-${idx}`;
-    return <div className="article" onMouseEnter={ this.showOverlay }
+    return <div className="article" onPointerMove={ this.showOverlay }
           onMouseLeave={ this.hideOverlay }>
             <div className="image-container">
               <img className={imgClass} src={image} onLoad={this.onImgLoad}/>
