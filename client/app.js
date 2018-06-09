@@ -16,7 +16,7 @@ class App extends Component {
 
     this.toggleSummaries = this.toggleSummaries.bind(this);
     this.sortFunction = this.sortFunction.bind(this);
-    this.displayFunction = this.displayFunction.bind(this);
+    this.toggleDisplay = this.toggleDisplay.bind(this);
     this.state = {
       articles: null,
       error: null,
@@ -126,10 +126,10 @@ class App extends Component {
     }
   }
 
-  displayFunction() {
-    this.setState({displayDropdown: true});
-    console.log("yo");
-    console.log(this.state)
+  toggleDisplay() {
+    this.setState((prevState, props) => ({
+      displayDropdown: !prevState.displayDropdown
+    }))
   }
 
   render() {
@@ -177,7 +177,7 @@ class App extends Component {
           <div className="filters">
             <div className="date">{date}</div>|
             <div className="sort-form-container">
-            <div className="sort-form" onClick={this.displayFunction} style={dropdownStyle}>
+            <div className="sort-form" onClick={this.toggleDisplay} style={dropdownStyle}>
               {sortDivs}
             </div>
           </div>|
