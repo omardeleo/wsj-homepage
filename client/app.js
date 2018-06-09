@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HelloWorld from '../src/helloworld';
+import Header from '../src/header';
 import Article from '../src/article';
 import fontawesome from '@fortawesome/fontawesome';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
@@ -159,7 +159,7 @@ class App extends Component {
       let date = new Date(Date.now()).toLocaleString("en-EN", {month: "long", day: "numeric", year: "numeric"})
       return (
         <div>
-        <HelloWorld />
+        <Header />
         <div className="main">
           <div className="date">{date}</div>
           <div className="filters">
