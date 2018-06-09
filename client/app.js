@@ -133,13 +133,13 @@ class App extends Component {
   }
 
   render() {
-    const dropdownStyle = this.state.displayDropdown ? {height: "auto"} : {height: 20}
+    const dropdownStyle = this.state.displayDropdown ? {height: "auto"} : {height: 16}
     const {loaded, error, displayArticles, showSummaries, articles, categories, category} = this.state;
     let options = null;
     let sortOptions = ["Date (Newer)","Date (Older)","Rating (Higher)","Rating (Lower)","Views (More)","Views (Less)"]
 
     let sortDivs = sortOptions.map(option => <div>{option}</div>);
-
+    sortDivs = [sortDivs[0]].concat(sortDivs);
     if (categories) {
       options = categories.map( (category, idx) => {
         return <option value={category} key={idx}>{category}</option>;
@@ -172,18 +172,15 @@ class App extends Component {
       let date = new Date(Date.now()).toLocaleString("en-EN", {month: "long", day: "numeric", year: "numeric"})
       return (
         <div>
-
         <Header />
         <div className="main">
-
-
           <div className="filters">
-            <div className="date">{date}</div>
+            <div className="date">{date}</div>|
             <div className="sort-form-container">
             <div className="sort-form" onClick={this.displayFunction} style={dropdownStyle}>
               {sortDivs}
             </div>
-            </div>
+          </div>|
             <div className="filter-form">
               <select ref="filter" onChange={ (e) => { this.filterSelector("filter") } }>
                 <option value="All">All</option>
