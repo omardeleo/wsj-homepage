@@ -50,7 +50,7 @@ class App extends Component {
         displayArticles: articles,
         categories: categories,
         loaded: true,
-        sort: "date-max",
+        sort: "Date (Newer)",
         filter: "All"
       });
     }).catch((error) => {
@@ -87,17 +87,17 @@ class App extends Component {
   }
 
   sortRouter(sortValue, articles) {
-    if (sortValue === "date-max") {
+    if (sortValue === "Date (Newer)") {
       return this.sortFunction(articles, "date_published", "max");
-    } else if (sortValue === "date-min") {
+    } else if (sortValue === "Date (Older)") {
       return this.sortFunction(articles, "date_published");
-    } else if (sortValue === "rating-max") {
+    } else if (sortValue === "Rating (Higher)") {
       return this.sortFunction(articles, "rating", "max");
-    } else if (sortValue === "rating-min") {
+    } else if (sortValue === "Rating (Lower)") {
       return this.sortFunction(articles, "rating");
-    } else if (sortValue === "views-max") {
+    } else if (sortValue === "Views (More)") {
       return this.sortFunction(articles, "views", "max");
-    } else if (sortValue === "views-min") {
+    } else if (sortValue === "Views (Less)") {
       return this.sortFunction(articles, "views");
     }
   }
@@ -132,14 +132,21 @@ class App extends Component {
     }))
   }
 
+  selectFunction(type, option) {
+    let articles = this.state.articles;
+    if (type === "sort") {
+      this.sortRouter(option, articles);
+      this.setState({sort: option})
+    }
+  }
+
   render() {
     const dropdownStyle = this.state.displayDropdown ? {height: "auto"} : {height: 16}
-    const {loaded, error, displayArticles, showSummaries, articles, categories, category} = this.state;
+    const {loaded, error, displayArticles, showSummaries, articles, categories, category, sort} = this.state;
     let options = null;
     let sortOptions = ["Date (Newer)","Date (Older)","Rating (Higher)","Rating (Lower)","Views (More)","Views (Less)"]
-
-    let sortDivs = sortOptions.map(option => <div>{option}</div>);
-    sortDivs = [sortDivs[0]].concat(sortDivs);
+    let thing = <div className="sort-placeholder">{sort}<span><FontAwesomeIcon icon={['fas', 'sort']} /></span></div>;
+    let sortDivs = sortOptions.map((option, idx) => <div key={idx} onClick={() => this.selectFunction("sort", option)}>{option}</div>);
     if (categories) {
       options = categories.map( (category, idx) => {
         return <option value={category} key={idx}>{category}</option>;
@@ -178,6 +185,7 @@ class App extends Component {
             <div className="date">{date}</div>|
             <div className="sort-form-container">
             <div className="sort-form" onClick={this.toggleDisplay} style={dropdownStyle}>
+              {thing}
               {sortDivs}
             </div>
           </div>|
