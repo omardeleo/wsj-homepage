@@ -110,17 +110,17 @@ time, mark, audio, video {
 	padding-right: 8px;
 }
 
-.sort-form-container {
+.form-container {
 	width: 120px;
 
 }
 
-.sort-placeholder span{
+.placeholder span{
 	float: right;
 	font-size: 14px;
 }
 
-.sort-form {
+.form {
 	padding-right: 8px;
 	display: flex;
 	flex-direction: column;
@@ -133,7 +133,7 @@ time, mark, audio, video {
 	font-family: sans-serif;
 }
 
-.sort-form div{
+.form div {
 	box-sizing: border-box;
 	padding-left: 8px;
 	height: 22px;
@@ -147,24 +147,24 @@ time, mark, audio, video {
   user-select: none;
 }
 
-.sort-form div:hover {
+.form div:hover {
 	color: #06c;
 }
 
-.sort-form div:nth-of-type(1) {
+.form div:nth-of-type(1) {
 	border: none;
 }
 
-.sort-form div:nth-of-type(1):hover {
+.form div:nth-of-type(1):hover {
 	color: black;
 	cursor: default;
 }
 
-.sort-form div:nth-of-type(2) {
+.form div:nth-of-type(2) {
 	border-top: 1px solid #999;
 }
 
-.sort-form div:last-of-type {
+.form div:last-of-type {
 	border-bottom: 1px solid #999;
 }
 

@@ -26,7 +26,7 @@ class App extends Component {
       categories: null,
       sort: null,
       filter: null,
-      displayDropdown: false
+      sortDisplay: false
     };
   }
 
@@ -126,10 +126,16 @@ class App extends Component {
     }
   }
 
-  toggleDisplay() {
-    this.setState((prevState, props) => ({
-      displayDropdown: !prevState.displayDropdown
-    }))
+  toggleDisplay(filter) {
+    if (filter === "filterDisplay") {
+      this.setState((prevState, props) => ({
+        filterDisplay: !prevState.filterDisplay
+      }))
+    } else {
+      this.setState((prevState, props) => ({
+        sortDisplay: !prevState.sortDisplay
+      }))
+    }
   }
 
   selectFunction(type, option) {
@@ -141,16 +147,19 @@ class App extends Component {
   }
 
   render() {
-    const dropdownStyle = this.state.displayDropdown ? {height: "auto"} : {height: 16}
-    const {loaded, error, displayArticles, showSummaries, articles, categories, category, sort} = this.state;
+    let sortStyle, filterStyle;
+    sortStyle =  this.state.sortDisplay ? {height: "auto"} : {height: 16};
+    filterStyle = this.state.filterDisplay ? {height: "auto"} : {height: 16};
+    const {loaded, error, displayArticles, showSummaries, articles, categories, category, sort, filter} = this.state;
     let options = null;
     let sortOptions = ["Date (Newer)","Date (Older)","Rating (Higher)","Rating (Lower)","Views (More)","Views (Less)"]
-    let thing = <div className="sort-placeholder">{sort}<span><FontAwesomeIcon icon={['fas', 'sort']} /></span></div>;
+    let thing = <div className="placeholder">{sort}<span><FontAwesomeIcon icon={['fas', 'sort']} /></span></div>;
+    let thing2 = <div className="placeholder">{filter}<span><FontAwesomeIcon icon={['fas', 'sort']} /></span></div>;
     let sortDivs = sortOptions.map((option, idx) => <div key={idx} onClick={() => this.selectFunction("sort", option)}>{option}</div>);
+    let catDivs = null;
     if (categories) {
-      options = categories.map( (category, idx) => {
-        return <option value={category} key={idx}>{category}</option>;
-      });
+      let cats = ["All"].concat(categories);
+      catDivs = cats.map((option, idx) => <div key={idx} onClick={() => this.selectFunction("filter", option)}>{option}</div>)
     }
 
 
@@ -183,17 +192,17 @@ class App extends Component {
         <div className="main">
           <div className="filters">
             <div className="date">{date}</div>|
-            <div className="sort-form-container">
-            <div className="sort-form" onClick={this.toggleDisplay} style={dropdownStyle}>
+            <div className="form-container">
+            <div className="form" onClick={() => this.toggleDisplay("sortDisplay")} style={sortStyle}>
               {thing}
               {sortDivs}
             </div>
           </div>|
-            <div className="filter-form">
-              <select ref="filter" onChange={ (e) => { this.filterSelector("filter") } }>
-                <option value="All">All</option>
-                {options}
-              </select>
+            <div className="form-container">
+              <div className="form" onClick={() => this.toggleDisplay("filterDisplay")} style={filterStyle}>
+                {thing2}
+                {catDivs}
+              </div>
             </div>
           </div>
           <div className="articles-container">
@@ -209,13 +218,3 @@ class App extends Component {
 }
 
 export default App;
-// <div className="intro">
-//   The first 3 are always free.
-// </div>
-
-// <option value="date-max">Date (Newer)</option>
-// <option value="date-min">Date (Older)</option>
-// <option value="rating-max">Rating (Higher)</option>
-// <option value="rating-min">Rating (Lower)</option>
-// <option value="views-max">Views (More)</option>
-// <option value="views-min">Views (Less)</option>
