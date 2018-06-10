@@ -17,7 +17,6 @@ class Header extends Component {
               </div>
             </div>
             <div className="header">
-
               <h1>
                 <img src='assets/wsj-logo.svg' />
               </h1>

@@ -19,25 +19,24 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+.header-container {
+	width: 100%;
+	position: fixed;
+	height: auto;
+	background-color: white;
+	top: 0;
+	display: block;
+	z-index: 2;
+}
+
 .main {
+	margin-top: 150px;
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
   align-items: center;
-}
-
-.intro {
-	position: absolute;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	background-color: rgb(0,0,0,0.8);
-	display: flex;
-	color: white;
-	align-items: center;
-	justify-content: center;
 }
 
 .ticker {
@@ -91,6 +90,10 @@ time, mark, audio, video {
 }
 
 .filters {
+	position: fixed;
+	top: 94px;
+	z-index: 2;
+	background-color: white;
 	border-bottom: 1px solid #999;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -99,7 +102,73 @@ time, mark, audio, video {
   width: 100%;
   display: flex;
   justify-content: center;
+	font-family: sans-serif;
 }
+
+.date {
+	font-size: 14px;
+	padding-right: 8px;
+}
+
+.sort-form-container {
+	width: 120px;
+
+}
+
+.sort-placeholder span{
+	float: right;
+	font-size: 14px;
+}
+
+.sort-form {
+	padding-right: 8px;
+	display: flex;
+	flex-direction: column;
+	height: 10px;
+	overflow: hidden;
+	position: absolute;
+	width: inherit;
+	background-color: white;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+.sort-form div{
+	box-sizing: border-box;
+	padding-left: 8px;
+	height: 22px;
+	width: inherit;
+	font-size: 14px;
+	border-right: 1px solid #999;
+	border-left: 1px solid #999;
+	-webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sort-form div:hover {
+	color: #06c;
+}
+
+.sort-form div:nth-of-type(1) {
+	border: none;
+}
+
+.sort-form div:nth-of-type(1):hover {
+	color: black;
+	cursor: default;
+}
+
+.sort-form div:nth-of-type(2) {
+	border-top: 1px solid #999;
+}
+
+.sort-form div:last-of-type {
+	border-bottom: 1px solid #999;
+}
+
+
 .articles-container {
   width: auto;
   display: grid;
@@ -113,7 +182,6 @@ time, mark, audio, video {
   width:330px;
   height: 330px;
   overflow: hidden;
-  cursor: pointer;
 }
 
 .image-container {
@@ -154,6 +222,7 @@ img[class^="article-image"] {
 .headline, .summary {
   padding-left: 20px;
   padding-right: 20px;
+	cursor: default;
 }
 
 .headline {
@@ -236,6 +305,7 @@ img[class^="article-image"] {
    background-color: #222;
    text-decoration: none;
    color: white;
+   cursor: pointer;
  }
 
  .read-button:hover {

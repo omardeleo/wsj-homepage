@@ -16,6 +16,7 @@ class App extends Component {
 
     this.toggleSummaries = this.toggleSummaries.bind(this);
     this.sortFunction = this.sortFunction.bind(this);
+    this.toggleDisplay = this.toggleDisplay.bind(this);
     this.state = {
       articles: null,
       error: null,
@@ -24,12 +25,13 @@ class App extends Component {
       displayArticles: null,
       categories: null,
       sort: null,
-      filter: null
+      filter: null,
+      displayDropdown: false
     };
   }
 
   componentDidMount() {
-    //fetching data clientside
+
     fetch('/api/articles').then((data) => {
       return data.json();
     }).then((data) => {
@@ -48,7 +50,7 @@ class App extends Component {
         displayArticles: articles,
         categories: categories,
         loaded: true,
-        sort: "date-max",
+        sort: "Date (Newer)",
         filter: "All"
       });
     }).catch((error) => {
@@ -85,17 +87,17 @@ class App extends Component {
   }
 
   sortRouter(sortValue, articles) {
-    if (sortValue === "date-max") {
+    if (sortValue === "Date (Newer)") {
       return this.sortFunction(articles, "date_published", "max");
-    } else if (sortValue === "date-min") {
+    } else if (sortValue === "Date (Older)") {
       return this.sortFunction(articles, "date_published");
-    } else if (sortValue === "rating-max") {
+    } else if (sortValue === "Rating (Higher)") {
       return this.sortFunction(articles, "rating", "max");
-    } else if (sortValue === "rating-min") {
+    } else if (sortValue === "Rating (Lower)") {
       return this.sortFunction(articles, "rating");
-    } else if (sortValue === "views-max") {
+    } else if (sortValue === "Views (More)") {
       return this.sortFunction(articles, "views", "max");
-    } else if (sortValue === "views-min") {
+    } else if (sortValue === "Views (Less)") {
       return this.sortFunction(articles, "views");
     }
   }
@@ -124,9 +126,27 @@ class App extends Component {
     }
   }
 
+  toggleDisplay() {
+    this.setState((prevState, props) => ({
+      displayDropdown: !prevState.displayDropdown
+    }))
+  }
+
+  selectFunction(type, option) {
+    let articles = this.state.articles;
+    if (type === "sort") {
+      this.sortRouter(option, articles);
+      this.setState({sort: option})
+    }
+  }
+
   render() {
-    const {loaded, error, displayArticles, showSummaries, articles, categories, category} = this.state;
+    const dropdownStyle = this.state.displayDropdown ? {height: "auto"} : {height: 16}
+    const {loaded, error, displayArticles, showSummaries, articles, categories, category, sort} = this.state;
     let options = null;
+    let sortOptions = ["Date (Newer)","Date (Older)","Rating (Higher)","Rating (Lower)","Views (More)","Views (Less)"]
+    let thing = <div className="sort-placeholder">{sort}<span><FontAwesomeIcon icon={['fas', 'sort']} /></span></div>;
+    let sortDivs = sortOptions.map((option, idx) => <div key={idx} onClick={() => this.selectFunction("sort", option)}>{option}</div>);
     if (categories) {
       options = categories.map( (category, idx) => {
         return <option value={category} key={idx}>{category}</option>;
@@ -159,24 +179,17 @@ class App extends Component {
       let date = new Date(Date.now()).toLocaleString("en-EN", {month: "long", day: "numeric", year: "numeric"})
       return (
         <div>
-
         <Header />
         <div className="main">
-
-
           <div className="filters">
-            <div className="date">{date}</div>
-            <div className="select-form">
-              <select ref="sort" onChange={ (e) => { this.filterSelector("sort") } }>
-                <option value="date-max">Date (Newer)</option>
-                <option value="date-min">Date (Older)</option>
-                <option value="rating-max">Rating (Higher)</option>
-                <option value="rating-min">Rating (Lower)</option>
-                <option value="views-max">Views (More)</option>
-                <option value="views-min">Views (Less)</option>
-              </select>
+            <div className="date">{date}</div>|
+            <div className="sort-form-container">
+            <div className="sort-form" onClick={this.toggleDisplay} style={dropdownStyle}>
+              {thing}
+              {sortDivs}
             </div>
-            <div className="select-form">
+          </div>|
+            <div className="filter-form">
               <select ref="filter" onChange={ (e) => { this.filterSelector("filter") } }>
                 <option value="All">All</option>
                 {options}
@@ -199,3 +212,10 @@ export default App;
 // <div className="intro">
 //   The first 3 are always free.
 // </div>
+
+// <option value="date-max">Date (Newer)</option>
+// <option value="date-min">Date (Older)</option>
+// <option value="rating-max">Rating (Higher)</option>
+// <option value="rating-min">Rating (Lower)</option>
+// <option value="views-max">Views (More)</option>
+// <option value="views-min">Views (Less)</option>
