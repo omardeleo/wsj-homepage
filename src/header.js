@@ -1,4 +1,3 @@
-//import react, because we want to build off a React component
 import React, { Component } from 'react';
 
 class Header extends Component {
