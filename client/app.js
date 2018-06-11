@@ -16,7 +16,7 @@ class App extends Component {
 
     this.toggleSummaries = this.toggleSummaries.bind(this);
     this.sortFunction = this.sortFunction.bind(this);
-    this.toggleDisplay = this.toggleDisplay.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
     this.state = {
       articles: null,
       error: null,
@@ -113,7 +113,7 @@ class App extends Component {
     this.setState({displayArticles: articles, sort, filter});
   }
 
-  toggleDisplay(filter) {
+  toggleMenu(filter) {
     if (filter === "filterDisplay") {
       this.setState((prevState, props) => ({
         filterDisplay: !prevState.filterDisplay
@@ -153,7 +153,6 @@ class App extends Component {
       catDivs = catOptions.map((option, idx) => <div key={idx} onClick={() => this.selectFunction("filter", option)}>{option}</div>)
     }
 
-
     if (error) {
       return <div>Sorry! Something went wrong</div>
     } else if (!loaded) {
@@ -184,13 +183,13 @@ class App extends Component {
           <div className="filters">
             <div className="date">{date}</div>|
             <div className="form-container">
-            <div className="form" onClick={() => this.toggleDisplay("sortDisplay")} style={sortStyle}>
+            <div className="form" onClick={() => this.toggleMenu("sortDisplay")} style={sortStyle}>
               {thing}
               {sortDivs}
             </div>
           </div>|
             <div className="form-container">
-              <div className="form" onClick={() => this.toggleDisplay("filterDisplay")} style={filterStyle}>
+              <div className="form" onClick={() => this.toggleMenu("filterDisplay")} style={filterStyle}>
                 {thing2}
                 {catDivs}
               </div>
