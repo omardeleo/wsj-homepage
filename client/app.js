@@ -113,19 +113,6 @@ class App extends Component {
     this.setState({displayArticles: articles, sort, filter});
   }
 
-  filterSelector(key) {
-    let sort, filter;
-    if (key === "sort") {
-      sort = this.refs.sort.value;
-      filter = this.state.filter;
-      this.filterFunction(sort, filter);
-    } else {
-      sort = this.state.sort;
-      filter = this.refs.filter.value;
-      this.filterFunction(sort, filter);
-    }
-  }
-
   toggleDisplay(filter) {
     if (filter === "filterDisplay") {
       this.setState((prevState, props) => ({
@@ -139,11 +126,15 @@ class App extends Component {
   }
 
   selectFunction(type, option) {
-    let articles = this.state.articles;
+    let sort, filter;
     if (type === "sort") {
-      this.sortRouter(option, articles);
-      this.setState({sort: option})
+      sort = option;
+      filter = this.state.filter;
+    } else {
+      sort = this.state.sort
+      filter = option;
     }
+    this.filterFunction(sort, filter);
   }
 
   render() {
@@ -158,8 +149,8 @@ class App extends Component {
     let sortDivs = sortOptions.map((option, idx) => <div key={idx} onClick={() => this.selectFunction("sort", option)}>{option}</div>);
     let catDivs = null;
     if (categories) {
-      let cats = ["All"].concat(categories);
-      catDivs = cats.map((option, idx) => <div key={idx} onClick={() => this.selectFunction("filter", option)}>{option}</div>)
+      let catOptions = ["All"].concat(categories);
+      catDivs = catOptions.map((option, idx) => <div key={idx} onClick={() => this.selectFunction("filter", option)}>{option}</div>)
     }
 
 
