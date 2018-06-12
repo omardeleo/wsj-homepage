@@ -169,7 +169,6 @@ time, mark, audio, video {
 	border-bottom: 1px solid #999;
 }
 
-
 .articles-container {
   width: auto;
   display: grid;
@@ -320,6 +319,12 @@ img[class^="article-image"] {
 
 /* RESPONSIVE COMING SOON */
 
+
+.quotes {
+	min-width: 380px;
+	display: flex;
+	flex-wrap: wrap;
+}
 @media all and (max-width: 480px) {
 
   .articles-container {
@@ -404,5 +409,9 @@ img[class^="article-image"] {
 	.filters {
 		border-top: 1px solid gray;
 		margin-top: 15px;
+	}
+
+	.quotes {
+		font-size: 10px;
 	}
 }
