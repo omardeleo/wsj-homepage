@@ -22,9 +22,9 @@ class Article extends Component {
 
   updateDimensions() {
     if (window.innerWidth < 480) {
-      this.setState({overlayMarginTop: -230, overlayHeight: -600, imgHeight: 600});
+      this.setState({overlayMarginTop: -230, overlayHeight: -600, imgHeight: 600, displayOverlay: false});
     } else {
-      this.setState({overlayMarginTop: -118, overlayHeight: -330, imgHeight: 330});
+      this.setState({overlayMarginTop: -118, overlayHeight: -330, imgHeight: 330, displayOverlay: false});
     }
   }
 
