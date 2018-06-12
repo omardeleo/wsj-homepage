@@ -4,60 +4,53 @@ import Overlay from './overlay';
 class Article extends Component {
   constructor(props) {
     super(props);
-
-    this.showOverlay = this.showOverlay.bind(this);
-    this.hideOverlay = this.hideOverlay.bind(this);
+    this.toggleOverlay = this.toggleOverlay.bind(this);
     this.onImgLoad = this.onImgLoad.bind(this);
-    this.state = { overlayMarginTop: null, imgHeight: null, headlineMarginBottom: null, test: false, displayOverlay: false };
+    this.state = { overlayMarginTop: null,
+      imgHeight: null,
+      headlineMarginBottom: 100,
+      test: false,
+      displayOverlay: false,
+      overlayHeight: 0
+    };
   }
 
   componentDidMount() {
-    let img = document.querySelector(`.article-image-${this.props.idx}`);
-    let margin = img.clientHeight === 330 ? -118 : -230;
-    this.setState({imgHeight: img.clientHeight, test: false })
-    console.log(this.state.displayOverlay);
+    this.updateDimensions();
+    window.addEventListener("resize", this.updateDimensions.bind(this));
+  }
+
+  updateDimensions() {
+    if (window.innerWidth < 480) {
+      this.setState({overlayMarginTop: -230, overlayHeight: -600, imgHeight: 600});
+    } else {
+      this.setState({overlayMarginTop: -118, overlayHeight: -330, imgHeight: 330});
+    }
   }
 
   toggleOverlay(e) {
-    if (!this.state.test) {
-      e.preventDefault();
-      
-    }
-  }
-  showOverlay(e) {
-    if (!this.state.test) {
-      e.preventDefault();
-      // let img = document.querySelector(`.article-image-${this.props.idx}`);
-      // let margin = img.clientHeight === 330 ? -330 : -600;
-      // this.setState( {overlayMarginTop: margin, headlineMarginBottom: 0});
-      this.setState({displayOverlay:true});
-    }
-  }
-
-  hideOverlay(e) {
-    if (!this.state.test) {
-      e.preventDefault();
-      this.setState()
-      // let img = document.querySelector(`.article-image-${this.props.idx}`);
-      // let margin = img.clientHeight === 330 ? -118 : -230;
-      // this.setState( {overlayMarginTop: margin, headlineMarginBottom: 100});
-    }
+    e.preventDefault();
+    console.log("ok");
+    const marginBottom = this.state.headlineMarginBottom === 100 ? 0 : 100;
+    this.setState({displayOverlay: !this.state.displayOverlay, headlineMarginBottom: marginBottom});
   }
 
   onImgLoad({target:img}) {
-    let height = img.offsetHeight;
-    let margin = height === 330 ? -118 : -230;
-    // this.setState({ overlayMarginTop: margin});
-      //imgHeight: height, headlineMarginBottom: 100, test: false })
+    this.setState({imgHeight: img.offsetHeight});
+  }
+
+  marginTop() {
+    return this.state.displayOverlay ? this.state.overlayHeight : this.state.overlayMarginTop;
   }
 
   render() {
-    const overlayStyle = this.state.overlayMarginTop ? { marginTop: this.state.overlayMarginTop } : {};
+    const {displayOverlay} = this.state;
+    const overlayStyle = {marginTop: this.marginTop()}
     const {headline, summary, showSummary, image, idx, date, rating, views, link, category} = this.props
     const summaryDisplay = showSummary ? <div className="article-summary">{summary}</div> : "";
     const imgClass = `article-image-${idx}`;
-    return <div className="article" onPointerMove={ this.showOverlay }
-          onMouseLeave={ this.hideOverlay }>
+    return <div className="article" onMouseEnter={ this.toggleOverlay }
+          onMouseLeave={ this.toggleOverlay }>
             <div className="image-container">
               <img className={imgClass} src={image} onLoad={this.onImgLoad}/>
             </div>
