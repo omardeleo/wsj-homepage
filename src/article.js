@@ -8,36 +8,51 @@ class Article extends Component {
     this.showOverlay = this.showOverlay.bind(this);
     this.hideOverlay = this.hideOverlay.bind(this);
     this.onImgLoad = this.onImgLoad.bind(this);
-    // this.state = { overlayMarginTop: -600, imgHeight: 0, headlineMarginBottom: 0, test: true };
-    this.state = { overlayMarginTop: -118, imgHeight: 0, headlineMarginBottom: 100, test: false };
+    this.state = { overlayMarginTop: null, imgHeight: null, headlineMarginBottom: null, test: false, displayOverlay: false };
   }
 
+  componentDidMount() {
+    let img = document.querySelector(`.article-image-${this.props.idx}`);
+    let margin = img.clientHeight === 330 ? -118 : -230;
+    this.setState({imgHeight: img.clientHeight, test: false })
+    console.log(this.state.displayOverlay);
+  }
+
+  toggleOverlay(e) {
+    if (!this.state.test) {
+      e.preventDefault();
+      
+    }
+  }
   showOverlay(e) {
     if (!this.state.test) {
       e.preventDefault();
-      let img = document.querySelector(`.article-image-${this.props.idx}`);
-      let margin = img.clientHeight === 330 ? -330 : -600;
-      this.setState( {overlayMarginTop: margin, headlineMarginBottom: 0});
+      // let img = document.querySelector(`.article-image-${this.props.idx}`);
+      // let margin = img.clientHeight === 330 ? -330 : -600;
+      // this.setState( {overlayMarginTop: margin, headlineMarginBottom: 0});
+      this.setState({displayOverlay:true});
     }
   }
 
   hideOverlay(e) {
     if (!this.state.test) {
       e.preventDefault();
-      let img = document.querySelector(`.article-image-${this.props.idx}`);
-      let margin = img.clientHeight === 330 ? -118 : -230;
-      this.setState( {overlayMarginTop: margin, headlineMarginBottom: 100});
+      this.setState()
+      // let img = document.querySelector(`.article-image-${this.props.idx}`);
+      // let margin = img.clientHeight === 330 ? -118 : -230;
+      // this.setState( {overlayMarginTop: margin, headlineMarginBottom: 100});
     }
   }
 
   onImgLoad({target:img}) {
-    this.setState({imgHeight:img.offsetHeight});
+    let height = img.offsetHeight;
+    let margin = height === 330 ? -118 : -230;
+    // this.setState({ overlayMarginTop: margin});
+      //imgHeight: height, headlineMarginBottom: 100, test: false })
   }
 
   render() {
-    const overlayStyle = {
-        marginTop: this.state.overlayMarginTop
-    };
+    const overlayStyle = this.state.overlayMarginTop ? { marginTop: this.state.overlayMarginTop } : {};
     const {headline, summary, showSummary, image, idx, date, rating, views, link, category} = this.props
     const summaryDisplay = showSummary ? <div className="article-summary">{summary}</div> : "";
     const imgClass = `article-image-${idx}`;
