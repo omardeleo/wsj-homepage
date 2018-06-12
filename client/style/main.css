@@ -353,7 +353,6 @@ img[class^="article-image"] {
     color: white;
     box-sizing: border-box;
     text-shadow: 1px 1px black;
-		margin-top: -230px;
   }
 
 	.category {
@@ -383,7 +382,6 @@ img[class^="article-image"] {
 	.headline {
 	  font-size: 30px;
 	  font-family: 'Prata', serif;
-
 	}
 
 	.overlay-footer {
