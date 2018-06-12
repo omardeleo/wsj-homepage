@@ -112,7 +112,7 @@ time, mark, audio, video {
 
 .form-container {
 	width: 120px;
-
+	margin-right: 8px;
 }
 
 .placeholder span{
@@ -121,7 +121,6 @@ time, mark, audio, video {
 }
 
 .form {
-	padding-right: 8px;
 	display: flex;
 	flex-direction: column;
 	height: 10px;
@@ -129,7 +128,6 @@ time, mark, audio, video {
 	position: absolute;
 	width: inherit;
 	background-color: white;
-	box-sizing: border-box;
 	font-family: sans-serif;
 }
 
@@ -205,6 +203,7 @@ img[class^="article-image"] {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+	cursor: default;
 }
 
 .category {
@@ -312,7 +311,7 @@ img[class^="article-image"] {
    background-color: #777;
  }
 
-
+/* RESPONSIVE COMING SOON */
 
 @media all and (max-width: 480px) {
 
@@ -328,8 +327,8 @@ img[class^="article-image"] {
     height: 600px;
     overflow: hidden;
     margin-bottom: 10px;
-    cursor: pointer;
   }
+
   .image-container {
     width: 380px;
     height: 600px;
@@ -344,18 +343,41 @@ img[class^="article-image"] {
     width: 380px;
     height: 600px;
     background-color: rgba(0, 0, 0, 0.6);
-    font-size: 30px;
     color: white;
     box-sizing: border-box;
-    padding-left: 24px;
-    padding-right: 24px;
-    padding-top: 14px;
     text-shadow: 1px 1px black;
   }
 
+	.category {
+	  background-color: rgba(102, 102, 102, 0.9);
+	  font-size: 20px;
+	  font-family: sans-serif;
+	  height: 30px;
+		padding-left: 25px;
+	  display: flex;
+	  align-items: center;
+	  box-sizing: border-box;
+		width: auto;
+	}
+
   .summary {
-    margin-top: 14px;
-    font-size: 20px;
+    font-size: 24px;
     line-height: 1.4;
   }
+
+	.headline, .summary {
+	  padding-left: 25px;
+	  padding-right: 20px;
+		margin-top: 15px;
+		cursor: default;
+	}
+
+	.headline {
+	  font-size: 30px;
+	  font-family: 'Prata', serif;
+	}
+	.overlay-footer {
+	  width: 380px;
+		margin-bottom: 15px;
+	}
 }

@@ -24,10 +24,4 @@ class Header extends Component {
   }
 };
 
-//this is where you can define fallbacks for any props that don't get sent
-Header.defaultProps = {
-  message: 'Hello World'
-};
-
-//export this, or other files can't use this
 export default Header;

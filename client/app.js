@@ -14,7 +14,6 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.toggleSummaries = this.toggleSummaries.bind(this);
     this.sortFunction = this.sortFunction.bind(this);
     this.toggleMenu = this.toggleMenu.bind(this);
     this.state = {
@@ -61,14 +60,6 @@ class App extends Component {
     });
   }
 
-  //click handler for button
-  toggleSummaries() {
-    // console.log('toggle button clicked');
-    this.setState((prevState, props) => ({
-      showSummaries: !prevState.showSummaries
-    }))
-  }
-
   ratingGenerator(min,max) {
     let num = Math.random() * (max - min) + min;
     return Number(num.toFixed(1));
@@ -83,7 +74,7 @@ class App extends Component {
   sortFunction(articles, key, direction) {
     return articles.sort(function(a,b) {
       return direction === "max" ? b[key] - a[key] : a[key] - b[key];
-    })
+    });
   }
 
   sortRouter(sortValue, articles) {
@@ -142,15 +133,14 @@ class App extends Component {
     sortStyle =  this.state.sortDisplay ? {height: "auto"} : {height: 16};
     filterStyle = this.state.filterDisplay ? {height: "auto"} : {height: 16};
     const {loaded, error, displayArticles, showSummaries, articles, categories, category, sort, filter} = this.state;
-    let options = null;
-    let sortOptions = ["Date (Newer)","Date (Older)","Rating (Higher)","Rating (Lower)","Views (More)","Views (Less)"]
-    let thing = <div className="placeholder">{sort}<span><FontAwesomeIcon icon={['fas', 'sort']} /></span></div>;
-    let thing2 = <div className="placeholder">{filter}<span><FontAwesomeIcon icon={['fas', 'sort']} /></span></div>;
-    let sortDivs = sortOptions.map((option, idx) => <div key={idx} onClick={() => this.selectFunction("sort", option)}>{option}</div>);
-    let catDivs = null;
+    const sortOptions = ["Date (Newer)","Date (Older)","Rating (Higher)","Rating (Lower)","Views (More)","Views (Less)"]
+    const sortPlaceholder = <div className="placeholder">{sort}<span><FontAwesomeIcon icon={['fas', 'sort']} /></span></div>;
+    const filterPlaceholder = <div className="placeholder">{filter}<span><FontAwesomeIcon icon={['fas', 'sort']} /></span></div>;
+    const sortDivs = sortOptions.map((option, idx) => <div key={idx} onClick={() => this.selectFunction("sort", option)}>{option}</div>);
+    let filterDivs = null;
     if (categories) {
-      let catOptions = ["All"].concat(categories);
-      catDivs = catOptions.map((option, idx) => <div key={idx} onClick={() => this.selectFunction("filter", option)}>{option}</div>)
+      let filterOptions = ["All"].concat(categories);
+      filterDivs = filterOptions.map((option, idx) => <div key={idx} onClick={() => this.selectFunction("filter", option)}>{option}</div>)
     }
 
     if (error) {
@@ -175,7 +165,7 @@ class App extends Component {
             category={article.category}
           />);
       });
-      let date = new Date(Date.now()).toLocaleString("en-EN", {month: "long", day: "numeric", year: "numeric"})
+      const date = new Date(Date.now()).toLocaleString("en-EN", {month: "long", day: "numeric", year: "numeric"})
       return (
         <div>
         <Header />
@@ -183,15 +173,15 @@ class App extends Component {
           <div className="filters">
             <div className="date">{date}</div>|
             <div className="form-container">
-            <div className="form" onClick={() => this.toggleMenu("sortDisplay")} style={sortStyle}>
-              {thing}
-              {sortDivs}
-            </div>
-          </div>|
+              <div className="form" onClick={() => this.toggleMenu("sortDisplay")} style={sortStyle}>
+                {sortPlaceholder}
+                {sortDivs}
+              </div>
+            </div>|
             <div className="form-container">
               <div className="form" onClick={() => this.toggleMenu("filterDisplay")} style={filterStyle}>
-                {thing2}
-                {catDivs}
+                {filterPlaceholder}
+                {filterDivs}
               </div>
             </div>
           </div>

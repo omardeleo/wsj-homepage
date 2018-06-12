@@ -1,63 +1,17 @@
 import React, { Component } from 'react';
 import Overlay from './overlay';
 
-//Basic Article Component
 class Article extends Component {
   constructor(props) {
     super(props);
 
-    //initial state
     this.showOverlay = this.showOverlay.bind(this);
     this.hideOverlay = this.hideOverlay.bind(this);
     this.onImgLoad = this.onImgLoad.bind(this);
-    // this.state = { overlayMarginTop: -330, imgHeight: 0, headlineMarginBottom: 0, test: true };
+    // this.state = { overlayMarginTop: -600, imgHeight: 0, headlineMarginBottom: 0, test: true };
     this.state = { overlayMarginTop: -118, imgHeight: 0, headlineMarginBottom: 100, test: false };
   }
 
-  //Component Lifecycle
-  //https://reactjs.org/docs/react-component.html#the-component-lifecycle
-  /* DEPRECATED LIFECYCLE METHODS BELOW
-  UNSAFE_componentWillMount() {
-    // console.log('component will mount');
-  }
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    // console.log('component will receive props');
-  }
-  UNSAFE_componentWillUpdate() {
-    // console.log('component will update');
-  }
-  */
-
-
-  static getDerivedStateFromProps(props, state) {
-    // console.log('get derived state from props');
-    return null;
-  }
-
-  componentDidMount() {
-    // console.log('component did mount');
-
-  }
-  shouldComponentUpdate() {
-    return true;
-  }
-  getSnapshotBeforeUpdate(prevProps, prevState){
-    // console.log('get snapshot before update');
-    return { foo: 'bar' };
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // console.log('component did update');
-  }
-  componentWillUnmount() {
-    // console.log('component will unmount');
-  }
-
-  //this fires every time a prop or state changes
-  //to use any prop, use this.props.NAME_OF_PROP
-  //use {} to add JS expressions
-  //use className to add CSS classes
-  //remember that this is not HTML!!
-  //https://reactjs.org/docs/introducing-jsx.html
   showOverlay(e) {
     if (!this.state.test) {
       e.preventDefault();
@@ -70,7 +24,9 @@ class Article extends Component {
   hideOverlay(e) {
     if (!this.state.test) {
       e.preventDefault();
-      this.setState( {overlayMarginTop: -118, headlineMarginBottom: 100});
+      let img = document.querySelector(`.article-image-${this.props.idx}`);
+      let margin = img.clientHeight === 330 ? -118 : -230;
+      this.setState( {overlayMarginTop: margin, headlineMarginBottom: 100});
     }
   }
 
