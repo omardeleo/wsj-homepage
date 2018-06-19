@@ -5,7 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack --config webpack.config.server.js"
+    "start": "webpack --config webpack.config.server.js",
+    "compile:sass": "node-sass client/style/main.scss client/style/main.css"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
